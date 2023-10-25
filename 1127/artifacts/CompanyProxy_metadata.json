@@ -32,6 +32,44 @@
 					{
 						"indexed": false,
 						"internalType": "string",
+						"name": "groupName",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "company_name",
+						"type": "string"
+					}
+				],
+				"name": "NewAssetGroupAdd",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "groupName",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "company_name",
+						"type": "string"
+					}
+				],
+				"name": "NewAssetGroupClose",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
 						"name": "did",
 						"type": "string"
 					},
@@ -43,6 +81,25 @@
 					}
 				],
 				"name": "NewWorkerAdd",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "did",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "company_name",
+						"type": "string"
+					}
+				],
+				"name": "NewWorkerRemoved",
 				"type": "event"
 			},
 			{
@@ -126,20 +183,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "COMPANY_ADMIN_ROLE",
-				"outputs": [
-					{
-						"internalType": "bytes32",
-						"name": "",
-						"type": "bytes32"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "COMPANY_WORKER_ROLE",
+				"name": "ADMIN_ROLE",
 				"outputs": [
 					{
 						"internalType": "bytes32",
@@ -153,6 +197,19 @@
 			{
 				"inputs": [],
 				"name": "DEFAULT_ADMIN",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "WORKER_ROLE",
 				"outputs": [
 					{
 						"internalType": "bytes32",
@@ -339,11 +396,11 @@
 	},
 	"sources": {
 		"1127/CompanyProxy.sol": {
-			"keccak256": "0x408274114791bdd3879641f31a4e9015745646875606e9583d3e1aed74ba9b96",
+			"keccak256": "0x6d462c4db6f9ffce1ec37affbaa896aa6edb3cb3bdeb55ea33ba20ae20f5ef02",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e220734dcaa049c497e04d1c01836c192d98ad78bed5b3ffe6544325c090e155",
-				"dweb:/ipfs/QmNy6Maj427feqy6K3hkVgwbwWYtwQLAFLgqNX5dQ1hZqm"
+				"bzz-raw://b372e3a0fcdd44ce16f8e79a9fd4d61b8188497b201ec3c96330070883e6b28b",
+				"dweb:/ipfs/QmRF6BJjSduknKTwtqe9jdCRxSJFbLqwGpCWpq49oa3At1"
 			]
 		},
 		"1127/DataStruct.sol": {

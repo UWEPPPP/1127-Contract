@@ -35,6 +35,25 @@
 					{
 						"indexed": false,
 						"internalType": "string",
+						"name": "groupName",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "company_name",
+						"type": "string"
+					}
+				],
+				"name": "NewAssetGroupClose",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
 						"name": "did",
 						"type": "string"
 					},
@@ -270,6 +289,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "string",
+						"name": "_groupName",
+						"type": "string"
+					}
+				],
+				"name": "closeDataGroup",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "bytes32",
 						"name": "role",
 						"type": "bytes32"
@@ -394,6 +432,35 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_group",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_dataCid",
+						"type": "string"
+					}
+				],
+				"name": "updateDataInGroup",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -404,11 +471,23 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {
+				"addDataGroup(string)": {
+					"notice": "增加数据组 (admin)*"
+				},
+				"addDataInGroup(string,string)": {
+					"notice": "添加数据 （Worker） 假设有一个数据库专门来存资产的索引 公司did+group+id*"
+				},
 				"addWorker(string,address)": {
-					"notice": "增加员工*"
+					"notice": "增加员工 (admin)*"
+				},
+				"closeDataGroup(string)": {
+					"notice": "关闭数据组 (admin)*"
 				},
 				"removedWorker(string)": {
-					"notice": "删除员工*"
+					"notice": "删除员工 (admin)*"
+				},
+				"updateDataInGroup(string,uint256,string)": {
+					"notice": "更新数据 （Worker） 假设有一个数据库专门来存资产的索引 公司did+group+id*"
 				}
 			},
 			"version": 1
@@ -431,11 +510,11 @@
 	},
 	"sources": {
 		"1127/CompanyLogic.sol": {
-			"keccak256": "0x36cb56272753fd6089154c807c8ad18d79c20d18f6cf2597a285056ac80b8cf9",
+			"keccak256": "0xb2ec10deadd945f9bcec71146bc93d7d5172147f79e9b585cb323b9c8086110f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fae1eb2f1f3416f500ce1457c1d149c9b9d91e4452607fadfdad98884b289c18",
-				"dweb:/ipfs/QmUv13a51P6tvo7yPwwzmJ33UWh9M231EeZ1kvgxmkGPXe"
+				"bzz-raw://2c6f8b8298f3bfc45601f6af81b87ded3d36223201dfd49c19f35dc0141060de",
+				"dweb:/ipfs/QmNtHsymGWc6Hxqw3cB76dATz2J3YrjWcg7nYxKd2dBXzY"
 			]
 		},
 		"1127/DataStruct.sol": {

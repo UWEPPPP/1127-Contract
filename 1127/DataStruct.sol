@@ -15,6 +15,9 @@ library DataStruct{
     }
     struct Asset {
         string cid;
+        uint256 createdAt;
+        uint256 updatedAt;
+        address operator;
         // bool isPublic;
     }
     

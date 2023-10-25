@@ -8,19 +8,28 @@ contract CompanyProxy is AccessControl {
 
     string private company_name;
 
-    bytes32 public constant COMPANY_ADMIN_ROLE = keccak256("ADMIN");
+    bytes32 public constant ADMIN_ROLE = keccak256("ADMIN");
 
-    bytes32 public constant COMPANY_WORKER_ROLE = keccak256("WORKER");
+    bytes32 public constant WORKER_ROLE = keccak256("WORKER");
 
-    mapping (string => DataStruct.Worker) private  workerList; 
+    mapping (string => DataStruct.Worker) private  workerList;
+    
+    mapping  (string => DataStruct.AssetGroup) private  dataGroupList;
 
     event NewWorkerAdd(string did,string company_name);
+
+    event NewWorkerRemoved(string did,string company_name);
+
+    event NewAssetGroupAdd(string groupName,string company_name);
+
+    event NewAssetGroupClose(string groupName,string company_name);
     
     
      constructor(address founder,string memory _company_name,address commonLogicAddress) AccessControl(msg.sender){
-        setRoleAdmin(COMPANY_ADMIN_ROLE,DEFAULT_ADMIN);
-        setRoleAdmin(COMPANY_WORKER_ROLE,COMPANY_ADMIN_ROLE);
-        grantRole(COMPANY_ADMIN_ROLE, founder);
+        setRoleAdmin(ADMIN_ROLE,DEFAULT_ADMIN);
+        setRoleAdmin(WORKER_ROLE,ADMIN_ROLE);
+        grantRole(ADMIN_ROLE, founder);
+        grantRole(WORKER_ROLE, founder);
         implementationAddress = commonLogicAddress;
         company_name = _company_name;
      }
