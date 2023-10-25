@@ -2,19 +2,26 @@
 pragma solidity 0.8.11;
 import "1127/util/AccessControl.sol";
 import "1127/DataStruct.sol";
+import "1127/TraceAsset.sol";
+import "1127/util/BytesUtil.sol";
+contract CompanyProxy is AccessControl,BytesUtil {
+    TraceAsset _trace;
+      
+    address private admin;
 
-contract CompanyProxy is AccessControl {
     address private implementationAddress;
 
     string private company_name;
 
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN");
 
-    bytes32 public constant WORKER_ROLE = keccak256("WORKER");
+    bytes32 public constant BE_FIRED_ROLE = keccak256("Fired");
 
     mapping (string => DataStruct.Worker) private  workerList;
     
     mapping  (string => DataStruct.AssetGroup) private  dataGroupList;
+
+    mapping (uint256 => DataStruct.Asset[]) private traceList;
 
     event NewWorkerAdd(string did,string company_name);
 
@@ -26,10 +33,10 @@ contract CompanyProxy is AccessControl {
     
     
      constructor(address founder,string memory _company_name,address commonLogicAddress) AccessControl(msg.sender){
+        _trace=new TraceAsset();
+        admin = founder;
         setRoleAdmin(ADMIN_ROLE,DEFAULT_ADMIN);
-        setRoleAdmin(WORKER_ROLE,ADMIN_ROLE);
         grantRole(ADMIN_ROLE, founder);
-        grantRole(WORKER_ROLE, founder);
         implementationAddress = commonLogicAddress;
         company_name = _company_name;
      }

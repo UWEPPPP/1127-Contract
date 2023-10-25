@@ -176,7 +176,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "DEFAULT_ADMIN",
+				"name": "BE_FIRED_ROLE",
 				"outputs": [
 					{
 						"internalType": "bytes32",
@@ -189,7 +189,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "WORKER_ROLE",
+				"name": "DEFAULT_ADMIN",
 				"outputs": [
 					{
 						"internalType": "bytes32",
@@ -198,6 +198,59 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_group",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_dataCid",
+						"type": "string"
+					}
+				],
+				"name": "_addDataInGroup",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_group",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_dataCid",
+						"type": "string"
+					}
+				],
+				"name": "_updateDataInGroup",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -223,31 +276,12 @@
 				"inputs": [
 					{
 						"internalType": "string",
-						"name": "_group",
+						"name": "worker_did",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_dataCid",
-						"type": "string"
-					}
-				],
-				"name": "addDataInGroup",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "worker_did",
+						"name": "_groupName",
 						"type": "string"
 					},
 					{
@@ -437,29 +471,38 @@
 				"inputs": [
 					{
 						"internalType": "string",
-						"name": "_group",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "_dataCid",
+						"name": "str",
 						"type": "string"
 					}
 				],
-				"name": "updateDataInGroup",
+				"name": "stringToBytes32",
 				"outputs": [
 					{
-						"internalType": "bool",
+						"internalType": "bytes32",
 						"name": "",
-						"type": "bool"
+						"type": "bytes32"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "str",
+						"type": "string"
+					}
+				],
+				"name": "toRole",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "pure",
 				"type": "function"
 			}
 		],
@@ -471,23 +514,23 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {
+				"_addDataInGroup(string,string)": {
+					"notice": "添加数据 （指定组Worker）*"
+				},
+				"_updateDataInGroup(string,uint256,string)": {
+					"notice": "更新数据 （指定组Worker）*"
+				},
 				"addDataGroup(string)": {
 					"notice": "增加数据组 (admin)*"
 				},
-				"addDataInGroup(string,string)": {
-					"notice": "添加数据 （Worker） 假设有一个数据库专门来存资产的索引 公司did+group+id*"
-				},
-				"addWorker(string,address)": {
-					"notice": "增加员工 (admin)*"
+				"addWorker(string,string,address)": {
+					"notice": "增加员工(指定组) (admin)*"
 				},
 				"closeDataGroup(string)": {
 					"notice": "关闭数据组 (admin)*"
 				},
 				"removedWorker(string)": {
-					"notice": "删除员工 (admin)*"
-				},
-				"updateDataInGroup(string,uint256,string)": {
-					"notice": "更新数据 （Worker） 假设有一个数据库专门来存资产的索引 公司did+group+id*"
+					"notice": "删除员工(指定组) (admin)*"
 				}
 			},
 			"version": 1
@@ -510,19 +553,19 @@
 	},
 	"sources": {
 		"1127/CompanyLogic.sol": {
-			"keccak256": "0xb2ec10deadd945f9bcec71146bc93d7d5172147f79e9b585cb323b9c8086110f",
+			"keccak256": "0x82061504706a43c59617863d1ce6553776b4051c284964aa5835fa923b29bae4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2c6f8b8298f3bfc45601f6af81b87ded3d36223201dfd49c19f35dc0141060de",
-				"dweb:/ipfs/QmNtHsymGWc6Hxqw3cB76dATz2J3YrjWcg7nYxKd2dBXzY"
+				"bzz-raw://d78818a7b869b1babe585ff9c960c6bd718a07b993a1467df0d731bba56e1bd8",
+				"dweb:/ipfs/QmVUnBF64hLnu81s1z2vLPdb7ZmaEdXgun1GKb47PWn4ko"
 			]
 		},
 		"1127/DataStruct.sol": {
-			"keccak256": "0xcf73b93a26befeb1934cead8569e4d93a8a8bbe234dbebb6f2a7994c7acddedd",
+			"keccak256": "0x84dcb164ef761b6c27e7ddc8d8c9030d35468410aa45ee0e26613bf9a9c6ec24",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://599d5c9a2a9c5e1dff0699d7b8afd29e8bf0927afa7e50526c6193b2ac98d493",
-				"dweb:/ipfs/QmT1hk1qqQz6dcyTn8Eh92rWNZZd6Rwfr2L72sv1dXpPP1"
+				"bzz-raw://102401430199439dfc683daf9ed148f94c5a1ac42134aa95ce512cd2d3f76e09",
+				"dweb:/ipfs/QmPwiidQDQ3C14suxLSzVRMirYPity22681ji99sckKdrD"
 			]
 		},
 		"1127/util/AccessControl.sol": {
@@ -531,6 +574,14 @@
 			"urls": [
 				"bzz-raw://e1e299750c37535cda14c05fab46438caf37c0a506956e2fe697356128faab64",
 				"dweb:/ipfs/QmdKkxsUNp5WcY3LTt8MQzWMNodA7sAPPzR44qirzWgqRy"
+			]
+		},
+		"1127/util/BytesUtil.sol": {
+			"keccak256": "0x9786b845f2dba45c476f88c00d9692e3f8577aa26eea877e4b9bbf6358b7382a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ca77f727c1d8212947fad6787e602c4a4e48c289b3334a34f7aa677d67948cc",
+				"dweb:/ipfs/QmUETEt7nPJdEEYWQXRp6Sfk6m97WVW2zjWvWf9q5DonJ1"
 			]
 		}
 	},
