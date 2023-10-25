@@ -1,0 +1,102 @@
+{
+	"compiler": {
+		"version": "0.8.11+commit.d7f03943"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_accessControlAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "domain",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "company",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "companyAdmin",
+						"type": "address"
+					}
+				],
+				"name": "registerCompanyInDomain",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"1127/Logic.sol": "UserLogic"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"1127/AccessControl.sol": {
+			"keccak256": "0x340ad8e5ca4419b1a3323232112bb4fc1928f659a3474a9489ccc3937c19911a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0e4c7f6eb87349d16cbe2740b318f6f66fde52aae08c769d0bee31acb040f246",
+				"dweb:/ipfs/QmZcioccChTQQUZbdReWw3SaoCE8Lh5RFG4DThajVsNhwB"
+			]
+		},
+		"1127/Logic.sol": {
+			"keccak256": "0x3766386e816ef1f2d062dc56f31368b6768c2878c6d5e4e74d3502317192001d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://532e4aa77be20f0e75c47a00395180c4c7f9042d9770770b8853b0567442a947",
+				"dweb:/ipfs/QmPtYQxzJUQFsP6ebGX8cc5irDs4dGqFRoAXdCjHWuYxpr"
+			]
+		},
+		"1127/util/BaseAccessControl.sol": {
+			"keccak256": "0xcc597646b7a9ffd4ffef2940d6e035a2f98b5c6ec752d9b45b8cfbb9fa0e5644",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://cacb4924ac1d3b2b0b85b9de94dd9a1022d20c59f0039c3001824e900cb57a7f",
+				"dweb:/ipfs/QmRWCJkW1xhFPJAm4HXDAR4us5wHMGzc9JiAcuqLYzeyVx"
+			]
+		}
+	},
+	"version": 1
+}

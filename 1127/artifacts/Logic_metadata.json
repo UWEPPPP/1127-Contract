@@ -1,0 +1,118 @@
+{
+	"compiler": {
+		"version": "0.8.11+commit.d7f03943"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_accessControlAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "domain",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "company",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "companyAdmin",
+						"type": "address"
+					}
+				],
+				"name": "registerCompanyInDomain",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"1127/Logic.sol": "Logic"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"1127/AccessControl.sol": {
+			"keccak256": "0x8f8e973a8d3cb06a6dc0f236bc7c8206137fe1dac109883e311fedf2a3149225",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://221a1e962c44e63c3d7d1747efce0d5d478837a0a02d817da379aa8a86da9543",
+				"dweb:/ipfs/QmceK1VviZjZcm1rcB2xLtwWytfrJVq1JfedQSNJ7t29fN"
+			]
+		},
+		"1127/CompanyStorage.sol": {
+			"keccak256": "0xa9287ec070513884414d3f51aad000d5ec7a8a4e1f562945dd0b6ce0262cbbd8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3477289ea3e56b1a569d3a3f3b9b2e94af8894e413e7d451bbd53404895e6426",
+				"dweb:/ipfs/QmXv9p5vwmdLyhGREp91uLHJB2y1FqU5avEtQVZQSUgEFJ"
+			]
+		},
+		"1127/DataStruct.sol": {
+			"keccak256": "0x3edad0c4f6f9dbfef44c3d96518a7b9873fa56f7d195e3abdbbb873dd13effcb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2b2210892b52b389a85b3abd0e4bd144064e6c2313b114c7afb810761e4bc40a",
+				"dweb:/ipfs/QmQPshxbfxZsTMy7R6r3PpVbYXy6chLitMCkywLrg6RxVM"
+			]
+		},
+		"1127/Logic.sol": {
+			"keccak256": "0x53aa7b7a9fd694c9faeaf26820ad6da24064cfef7ebbdf7fa995720f6d93782f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://0b12fa5ff8bf71914dbdcb1ad8aa149735f3c39660de7cf819ad530258461e32",
+				"dweb:/ipfs/QmcAApS6eHNs5Dh6J2Khv7UVycdogS5sZT68VaftXYJgpC"
+			]
+		},
+		"1127/util/BaseAccessControl.sol": {
+			"keccak256": "0xcc597646b7a9ffd4ffef2940d6e035a2f98b5c6ec752d9b45b8cfbb9fa0e5644",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://cacb4924ac1d3b2b0b85b9de94dd9a1022d20c59f0039c3001824e900cb57a7f",
+				"dweb:/ipfs/QmRWCJkW1xhFPJAm4HXDAR4us5wHMGzc9JiAcuqLYzeyVx"
+			]
+		}
+	},
+	"version": 1
+}

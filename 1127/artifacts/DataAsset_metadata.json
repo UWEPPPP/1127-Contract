@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.11+commit.d7f03943"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"1127/DataAsset.sol": "DataAsset"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"1127/DataAsset.sol": {
+			"keccak256": "0x0180c5bfa9594116edb598ebc5c1069cec9990f4f602d0a4592bf6133fd477cd",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4e3f6312a304338eb3b5dc5836642d9e70114d327598f6958805be35eda1d702",
+				"dweb:/ipfs/QmcTyFpek4QsE9mtufBBVEuJAFLUpPUTJ6ucpotcFTStr3"
+			]
+		}
+	},
+	"version": 1
+}

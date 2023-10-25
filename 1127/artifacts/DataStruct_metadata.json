@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.11+commit.d7f03943"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"1127/DataStruct.sol": "DataStruct"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"1127/DataStruct.sol": {
+			"keccak256": "0x8281b471b2203c3259272980834814b2aa832fecc6114e5b930b0344d2afee9f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b8a58c7e3d0a8903f40dff4489f6c6421239c5c6a015e812ac24927a388f6dcc",
+				"dweb:/ipfs/QmeiEZ5i78VpZALY2tcvDSr9KwAQC9zCN2UQybA5UUkmVa"
+			]
+		}
+	},
+	"version": 1
+}

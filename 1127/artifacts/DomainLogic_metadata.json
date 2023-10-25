@@ -1,0 +1,126 @@
+{
+	"compiler": {
+		"version": "0.8.11+commit.d7f03943"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_accessControlAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "domain",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "string",
+						"name": "companydid",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "companyAdmin",
+						"type": "address"
+					}
+				],
+				"name": "registerCompanyInDomain",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"1127/DomainLogic.sol": "DomainLogic"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"1127/AccessControl.sol": {
+			"keccak256": "0x2853133828f5aab7ec477da84298c4713fed5623e33752eda81e1c2267626dc8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://98ca6e977224c4ed699155974e2c53ae724dac0fcfd83ae1313158c77e5bfdac",
+				"dweb:/ipfs/QmcEtNFNQHr4JjdYtQkup1ADW11JuZM6oqrFchemKQeozE"
+			]
+		},
+		"1127/CompanyStorage.sol": {
+			"keccak256": "0xd25e5d39dc65b81bf9f259b6a329454e1787bb969896e3fc8f867cd52e3036e2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fc8a8dd70bb69d77bad0897ef47a6cfcc2fa06ccb0ef174b9a732e62453a127c",
+				"dweb:/ipfs/QmbA4iN9aS4GTwAzqG2mjtdjF7m9MGAELbKZjuxZMCC5rz"
+			]
+		},
+		"1127/DataStruct.sol": {
+			"keccak256": "0x3edad0c4f6f9dbfef44c3d96518a7b9873fa56f7d195e3abdbbb873dd13effcb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2b2210892b52b389a85b3abd0e4bd144064e6c2313b114c7afb810761e4bc40a",
+				"dweb:/ipfs/QmQPshxbfxZsTMy7R6r3PpVbYXy6chLitMCkywLrg6RxVM"
+			]
+		},
+		"1127/DomainLogic.sol": {
+			"keccak256": "0xe0ee215cdf1c40c7ba8af048f8925e896ec8b61942043f1ab5e9ce9631c11ee6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a11876251a54ae7637d749cd5051f330098de235d268fc38a66ff58f4cffed10",
+				"dweb:/ipfs/QmT2pZYZnQBzhLLjBpUQcmzu1zKmeTEoQvqcfXPe6avAVL"
+			]
+		},
+		"1127/DomainStorage.sol": {
+			"keccak256": "0x28226833b555f2c042b7a429539fdb3e96d5315fe1ff6e15c8cfb3ce63a9ea96",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3092a255b6545b9e7301bfff20db9a52f4ea381282da63c6e829807170705160",
+				"dweb:/ipfs/QmSqQZT9hCUcxvPFr4FTxRrZqhrBNgiMpBKZZL7s3viH4b"
+			]
+		},
+		"1127/util/BaseAccessControl.sol": {
+			"keccak256": "0xcc597646b7a9ffd4ffef2940d6e035a2f98b5c6ec752d9b45b8cfbb9fa0e5644",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://cacb4924ac1d3b2b0b85b9de94dd9a1022d20c59f0039c3001824e900cb57a7f",
+				"dweb:/ipfs/QmRWCJkW1xhFPJAm4HXDAR4us5wHMGzc9JiAcuqLYzeyVx"
+			]
+		}
+	},
+	"version": 1
+}
