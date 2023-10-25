@@ -81,26 +81,24 @@ contract CompanyLogic is AccessControl{
 
     /**
     添加数据 （Worker）
-
-    假设有一个数据库专门来存资产的索引 公司did+group+id
     **/
     function addDataInGroup(string memory _group,string memory _dataCid) public AccessControl.onlyRole(WORKER_ROLE) returns (bool){
          require(dataGroupList[_group].isOpen,"No group found");
          uint256 size = dataGroupList[_group].assetSize;
          size++;
          dataGroupList[_group].assetSize = size;
-         dataGroupList[_group].assets[size] = DataStruct.Asset(_dataCid,block.timestamp,block.timestamp,address(0));
+         dataGroupList[_group].assets[size] = DataStruct.Asset(_dataCid,block.timestamp,block.timestamp,msg.sender);
          return true;
     }
 
-        /**
+     /**
     更新数据 （Worker）
-
-    假设有一个数据库专门来存资产的索引 公司did+group+id
     **/
     function updateDataInGroup(string memory _group,uint256 id,string memory _dataCid) public AccessControl.onlyRole(WORKER_ROLE) returns (bool){
          require(dataGroupList[_group].isOpen,"No group found");
-         dataGroupList[_group].assets[id] = DataStruct.Asset(_dataCid);
+         dataGroupList[_group].assets[id].cid = _dataCid;
+         dataGroupList[_group].assets[id].updatedAt = block.timestamp;
+         dataGroupList[_group].assets[id].operator = msg.sender;
          return true;
     }
 
