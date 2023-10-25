@@ -8,9 +8,14 @@ library DataStruct{
         string name;
     }
 
-    struct DataAsset{
+    struct AssetGroup{
+        mapping (uint256 => Asset) assets;
+        uint256 assetSize;
+        bool isOpen;
+    }
+    struct Asset {
         string cid;
-        bool isPublic;
+        // bool isPublic;
     }
     
     struct Worker{

@@ -13,18 +13,20 @@ contract CompanyLogic is AccessControl{
     bytes32 public constant WORKER_ROLE = keccak256("WORKER");
 
     mapping (string => DataStruct.Worker) private  workerList;
- 
+    
+    mapping  (string => DataStruct.AssetGroup) private  dataGroupList;
 
     event NewWorkerAdd(string did,string company_name);
 
     event NewWorkerRemoved(string did,string company_name);
 
+    event NewAssetGroupAdd(string groupName,string company_name);
+
+
     constructor() AccessControl(msg.sender){
        
     }
    
-
-    
     /**
     增加员工
     **/
@@ -32,6 +34,7 @@ contract CompanyLogic is AccessControl{
         if(hasRole(WORKER_ROLE,worker_address)){
             return false;
         }
+        require(!hasRole(WORKER_ROLE,worker_address),"The worker has been added");
         grantRole(WORKER_ROLE,worker_address);
         workerList[worker_did] = DataStruct.Worker(
              worker_did,worker_address
@@ -45,9 +48,7 @@ contract CompanyLogic is AccessControl{
     **/
    function removedWorker(string memory worker_did) public  AccessControl.onlyRole(ADMIN_ROLE) returns (bool) {
         DataStruct.Worker memory _removedWorker = workerList[worker_did];
-        if(!hasRole(WORKER_ROLE,_removedWorker.addr)){
-            return false;
-        }
+        require(hasRole(WORKER_ROLE,_removedWorker.addr),"The Worker has been deleted");
         revokeRole(WORKER_ROLE, _removedWorker.addr);
         workerList[worker_did] = DataStruct.Worker(
              "",address(0)
@@ -56,5 +57,19 @@ contract CompanyLogic is AccessControl{
         return true;
     }
 
-    function addDataGroup(string memory _groupName) public AccessControl.onlyRole(ADMIN_ROLE) ret
+    function addDataGroup(string memory _groupName) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool) {
+        require(!dataGroupList[_groupName].isOpen,"The group has exist");
+        dataGroupList[_groupName].isOpen=true;
+        emit NewAssetGroupAdd(_groupName, company_name);
+        return true;
+    }
+
+    function addDataInGroup(string memory _group,string memory _dataCid) public AccessControl.onlyRole(WORKER_ROLE) returns (bool){
+         require(dataGroupList[_group].isOpen,"No group found");
+         uint256 size = dataGroupList[_group].assetSize;
+         size++;
+         dataGroupList[_group].assetSize = size;
+         dataGroupList[_group].assets[size] = DataStruct.Asset(_dataCid);
+         return true;
+    }
 }

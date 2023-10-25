@@ -22,9 +22,7 @@ contract DomainContract is AccessControl{
     // function 
 
     function registerCompany(string memory company_did,string memory company_name,address company_owner)public AccessControl.onlyRole(DOMAIN_ADMIN) returns (bool) {
-       if(companies[company_did].addr != address(0)){
-            return false;
-       }
+       require(companies[company_did].addr == address(0),"The company is existed");
        CompanyProxy companyAddress = new CompanyProxy(company_owner,company_name,_commonlogicContract);
        companies[company_did]= DataStruct.Company(company_did,company_owner,company_name);
        emit NewCompanyRegistered(company_did,company_name,address(companyAddress));
@@ -32,9 +30,7 @@ contract DomainContract is AccessControl{
     }
 
     function removeCompany(string memory company_did)public AccessControl.onlyRole(DOMAIN_ADMIN) returns (bool) {
-       if(companies[company_did].addr == address(0)){
-            return false;
-       }
+       require(companies[company_did].addr != address(0),"The company doesn't exist");
        DataStruct.Company memory _removedcompany = companies[company_did];
        companies[company_did]= DataStruct.Company("",address(0),"");
        //理论上还得做更多操作 暂定这样先

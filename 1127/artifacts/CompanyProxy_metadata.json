@@ -347,11 +347,11 @@
 			]
 		},
 		"1127/DataStruct.sol": {
-			"keccak256": "0xacc2b9bfff81b8359e46d3238b6d2287f75c392792ef07a02ff02a398ebf8fb6",
+			"keccak256": "0xcf73b93a26befeb1934cead8569e4d93a8a8bbe234dbebb6f2a7994c7acddedd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://027490caecaea89d18b1766467e2a11ff53f1ac8bdcf473f8d5d2f4513db31b9",
-				"dweb:/ipfs/QmQXSdovY6ymFdVK4xJ1Bo9RPRV38MBAHcEXXQ1dWssfQL"
+				"bzz-raw://599d5c9a2a9c5e1dff0699d7b8afd29e8bf0927afa7e50526c6193b2ac98d493",
+				"dweb:/ipfs/QmT1hk1qqQz6dcyTn8Eh92rWNZZd6Rwfr2L72sv1dXpPP1"
 			]
 		},
 		"1127/util/AccessControl.sol": {
