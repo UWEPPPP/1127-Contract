@@ -6,30 +6,22 @@ import "1127/TraceAsset.sol";
 import "1127/util/CommonUtil.sol";
 contract CompanyProxy is AccessControl,CommonUtil {
     TraceAsset private _trace;
-    
+
     address private admin;
-
     address private implementationAddress;
-
     string private company_name;
 
     bytes32 public constant ADMIN_ROLE = keccak256("ADMIN");
-
     bytes32 public constant BE_FIRED_ROLE = keccak256("Fired");
 
-    mapping (string => DataStruct.Worker) private  workerList;
-    
-    mapping  (string => DataStruct.AssetGroup) private  dataGroupList;
-
+    mapping (address => DataStruct.Worker) private workerList;
+    mapping (string => DataStruct.AssetGroup) private dataGroupList;
     mapping (uint256 => DataStruct.AssetTrace[]) private traceList;
 
-    event NewWorkerAdd(string did,string company_name);
-
-    event NewWorkerRemoved(string did,string company_name);
-
-    event NewAssetGroupAdd(string groupName,string company_name);
-
-    event NewAssetGroupClose(string groupName,string company_name);
+    event NewWorkerAdd(address worker_address, string company_name);
+    event NewWorkerRemoved(address worker_address, string company_name);
+    event NewAssetGroupOpen(string groupName, string company_name);
+    event NewAssetGroupClose(string groupName, string company_name);
     
     
      constructor(address founder,string memory _company_name,address commonLogicAddress) AccessControl(msg.sender){
