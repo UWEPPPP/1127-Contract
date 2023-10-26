@@ -42,7 +42,7 @@
 						"type": "string"
 					}
 				],
-				"name": "NewAssetGroupAdd",
+				"name": "NewAssetGroupClose",
 				"type": "event"
 			},
 			{
@@ -61,7 +61,7 @@
 						"type": "string"
 					}
 				],
-				"name": "NewAssetGroupClose",
+				"name": "NewAssetGroupOpen",
 				"type": "event"
 			},
 			{
@@ -69,9 +69,9 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "did",
-						"type": "string"
+						"internalType": "address",
+						"name": "worker_address",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -88,9 +88,9 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "did",
-						"type": "string"
+						"internalType": "address",
+						"name": "worker_address",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -500,11 +500,11 @@
 	},
 	"sources": {
 		"1127/CompanyProxy.sol": {
-			"keccak256": "0x7c20e1a4e75af3f5822ae2cb2745e02da73dbc7ccae4351c537764016033c8a4",
+			"keccak256": "0x7d485a3c5e1b2f634f46a3e872e7ba89e46f555ed6ec83f72b40bf25d702258e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://56f5b9619185263561b7d9dffa0af68630dacd9cb2d079dab8f95b46cf906650",
-				"dweb:/ipfs/Qmdadz772eyVkf1bZTtWwqYTjSjrfLG896Tc15b7E7oTyd"
+				"bzz-raw://a64dcc82440ae7331617c0e676d47afe33883653078ea4b92b765a00799f8fc3",
+				"dweb:/ipfs/QmacX4BK2JGtrQS7avs9Zo8YQtMAA3HVif1BGKzEMwPEp8"
 			]
 		},
 		"1127/DataStruct.sol": {
