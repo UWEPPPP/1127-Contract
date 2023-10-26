@@ -97,13 +97,13 @@ contract AccessControl {
     }
     
     //当账户有威胁时 可以自主消除权限
-    function renounceRole(bytes32 role, address callerConfirmation)
-        public
+    // function renounceRole(bytes32 role, address callerConfirmation)
+    //     public
         
-    {
-        if (callerConfirmation != msg.sender) {
-            revert("BadConfirmation");
-        }
-        revokeRole(role, callerConfirmation);
-    }
+    // {
+    //     if (callerConfirmation != msg.sender) {
+    //         revert("BadConfirmation");
+    //     }
+    //     revokeRole(role, callerConfirmation);
+    // }
 }

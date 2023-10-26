@@ -199,24 +199,6 @@
 					},
 					{
 						"internalType": "address",
-						"name": "callerConfirmation",
-						"type": "address"
-					}
-				],
-				"name": "renounceRole",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "bytes32",
-						"name": "role",
-						"type": "bytes32"
-					},
-					{
-						"internalType": "address",
 						"name": "member",
 						"type": "address"
 					}
@@ -261,11 +243,11 @@
 	},
 	"sources": {
 		"1127/util/AccessControl.sol": {
-			"keccak256": "0x92e70c76864d88a5ee5ff4a834bb2ec3b4842543bd5841408352b4eb5b4aaf75",
+			"keccak256": "0xedec336484228c4d15d067f26068987542e887cf2474c5033d8574bc3e2945e2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e1e299750c37535cda14c05fab46438caf37c0a506956e2fe697356128faab64",
-				"dweb:/ipfs/QmdKkxsUNp5WcY3LTt8MQzWMNodA7sAPPzR44qirzWgqRy"
+				"bzz-raw://3687a464e5f79e6d56034123e371eb56c204a90a9eac811fb0d88894f0a9db1a",
+				"dweb:/ipfs/QmQZN6Mg3kLNH2UF2dnuhS56i6h9HA2JpMU8QkLwo3b2zj"
 			]
 		}
 	},

@@ -12,22 +12,23 @@ contract TraceAsset is AccessControl{
       grantRole(TRACER, msg.sender);
 
     }
-    mapping (uint256 => DataStruct.Asset[]) private traceList;
+    // 字符串格式为 Group名字+自增id
+    mapping (string => DataStruct.AssetTrace[]) private traceList;
 
     function setTraceRight(address getter) public AccessControl.onlyRole(ADMIN){
        grantRole(TRACER,getter);
     }
     
-    function add(uint256 timeStamp,DataStruct.Asset memory trace) public AccessControl.onlyRole(TRACER) {
-        traceList[timeStamp].push(trace);
+    function add(string memory hash,DataStruct.AssetTrace memory trace) public AccessControl.onlyRole(TRACER) {
+        traceList[hash].push(trace);
     }
 
-    function get(uint256 timeStamp) public view AccessControl.onlyRole(TRACER) returns(DataStruct.Asset[] memory){
-        return traceList[timeStamp];
+    function get(string memory hash) public view AccessControl.onlyRole(TRACER) returns(DataStruct.AssetTrace[] memory){
+        return traceList[hash];
     }
 
-    function getLastOperateTime(uint256 timeStamp) public view AccessControl.onlyRole(TRACER) returns(uint256){
-        DataStruct.Asset[] memory array = traceList[timeStamp];
-        return array[array.length-1].updatedAt;
+    function getLastOperateTime(string memory hash) public view AccessControl.onlyRole(TRACER) returns(uint256){
+        DataStruct.AssetTrace[] memory array = traceList[hash];
+        return array[array.length-1].operateTime;
     }
 }

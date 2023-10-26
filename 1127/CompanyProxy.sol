@@ -3,10 +3,10 @@ pragma solidity 0.8.11;
 import "1127/util/AccessControl.sol";
 import "1127/DataStruct.sol";
 import "1127/TraceAsset.sol";
-import "1127/util/BytesUtil.sol";
-contract CompanyProxy is AccessControl,BytesUtil {
-    TraceAsset _trace;
-      
+import "1127/util/CommonUtil.sol";
+contract CompanyProxy is AccessControl,CommonUtil {
+    TraceAsset private _trace;
+    
     address private admin;
 
     address private implementationAddress;
@@ -21,7 +21,7 @@ contract CompanyProxy is AccessControl,BytesUtil {
     
     mapping  (string => DataStruct.AssetGroup) private  dataGroupList;
 
-    mapping (uint256 => DataStruct.Asset[]) private traceList;
+    mapping (uint256 => DataStruct.AssetTrace[]) private traceList;
 
     event NewWorkerAdd(string did,string company_name);
 

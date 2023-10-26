@@ -9,17 +9,22 @@ library DataStruct {
     }
 
     struct AssetGroup {
-        mapping(uint256 => Asset) assets;
+        mapping(uint256 => AssetMetadata) assets;
         uint256 assetSize;
         bool isOpen;
     }
 
-    struct Asset {
+    struct AssetMetadata {
         string cid;
         uint256 createdAt;
-        uint256 updatedAt;
-        address operator;
+        address creator;
         bool isPublic;
+    }
+
+    struct AssetTrace{
+        AssetMetadata asset;
+        uint256 operateTime;
+        string operateMsg;
     }
 
     struct Worker {

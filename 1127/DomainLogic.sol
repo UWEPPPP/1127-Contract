@@ -3,7 +3,7 @@ pragma solidity 0.8.11;
 import "1127/util/AccessControl.sol";
 import "1127/CompanyProxy.sol";
 import "1127/DataStruct.sol";
-contract DomainContract is AccessControl{
+contract DomainContract is AccessControl,CommonUtil{
     address private  _commonlogicContract; 
     bytes32 public constant DOMAIN_ADMIN = keccak256("Domain_ADMIN");
 
@@ -14,13 +14,15 @@ contract DomainContract is AccessControl{
     event NewCompanyRemoved(string did,string name,address company_address);
 
     constructor(address _domainAdminAddress,address _commonlogicAddress) AccessControl(msg.sender){
+          
           setRoleAdmin(DOMAIN_ADMIN,DEFAULT_ADMIN);
           grantRole(DOMAIN_ADMIN, _domainAdminAddress);
           _commonlogicContract = _commonlogicAddress;
     }
 
     function registerCompany(string memory company_did,string memory company_name,address company_owner)public AccessControl.onlyRole(DOMAIN_ADMIN) returns (address) {
-       require(companies[company_did].addr == address(0),"The company is existed");
+       
+       require(companies[company_did].addr == address(0),error("DomainLogic","registerCompany","The company is existed"));
        CompanyProxy companyAddress = new CompanyProxy(company_owner,company_name,_commonlogicContract);
        companies[company_did]= DataStruct.Company(company_did,company_owner,company_name);
        emit NewCompanyRegistered(company_did,company_name,address(companyAddress));
@@ -28,7 +30,8 @@ contract DomainContract is AccessControl{
     }
 
     function removeCompany(string memory company_did)public AccessControl.onlyRole(DOMAIN_ADMIN) returns (bool) {
-       require(companies[company_did].addr != address(0),"The company doesn't exist");
+       
+       require(companies[company_did].addr != address(0),error("DomainLogic","removeCompany","The company doesn't exist"));
        DataStruct.Company memory _removedcompany = companies[company_did];
        companies[company_did]= DataStruct.Company("",address(0),"");
        //理论上还得做更多操作 暂定这样先

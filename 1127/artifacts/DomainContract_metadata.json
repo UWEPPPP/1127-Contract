@@ -194,6 +194,35 @@
 			{
 				"inputs": [
 					{
+						"internalType": "string",
+						"name": "_contract",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_function",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_msg",
+						"type": "string"
+					}
+				],
+				"name": "error",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "bytes32",
 						"name": "role",
 						"type": "bytes32"
@@ -315,24 +344,6 @@
 					},
 					{
 						"internalType": "address",
-						"name": "callerConfirmation",
-						"type": "address"
-					}
-				],
-				"name": "renounceRole",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "bytes32",
-						"name": "role",
-						"type": "bytes32"
-					},
-					{
-						"internalType": "address",
 						"name": "member",
 						"type": "address"
 					}
@@ -346,6 +357,68 @@
 					}
 				],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_a",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_b",
+						"type": "string"
+					}
+				],
+				"name": "strConcat",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "str",
+						"type": "string"
+					}
+				],
+				"name": "stringToBytes32",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "str",
+						"type": "string"
+					}
+				],
+				"name": "toRole",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "pure",
 				"type": "function"
 			}
 		],
@@ -377,11 +450,11 @@
 	},
 	"sources": {
 		"1127/CompanyProxy.sol": {
-			"keccak256": "0x5291237a583e84db4e6b6f6fa2adb264292ff7caee9e846677eaaca8965f44a7",
+			"keccak256": "0x85ae811090c3fdc88bc61878f04286c20aeef01fa9fad12e4a269319354e5cd7",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://888d123daf3a1962c75519de883f7aed3e0110918b732168820f14b57c97140b",
-				"dweb:/ipfs/QmbPGiYcbJ5G7RoWPZjkrEdb3gRw1QQQrWjQW1WwW8Bw2n"
+				"bzz-raw://552ed1a886902b7e77d7c56a133e2c367d4a4b8389c10f45ae412a76c5625693",
+				"dweb:/ipfs/Qmcf15XDCPGFFWxJJ9VRdTnQcSrTYAr3cJYAgkYLhrjsuM"
 			]
 		},
 		"1127/DataStruct.sol": {
@@ -393,11 +466,11 @@
 			]
 		},
 		"1127/DomainLogic.sol": {
-			"keccak256": "0x83c538a8fb8a40df2387ec97067e047847c8048ea23ebce78f5a0cf33a9f6de1",
+			"keccak256": "0x693cb8e387c8a289f75c8583a86e312bdd4e9dca6604c79fadb260dd7ed1dee9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e8a8e505902cce740d985c8b7ca09aae3fb94875939b254c75ecca7fb0a29c16",
-				"dweb:/ipfs/QmYvN5LYm8bpLQWCTyJwVHb3ev2PPNU3rfA4NB9gBGJJUC"
+				"bzz-raw://912887b7aff6371d4b798aebeafc90396cb98688a0b75e17a3f27e900e662693",
+				"dweb:/ipfs/QmVTtKbRNfqS543JhgkjqAZXvohwuKz6w5LHchjjQwBLh5"
 			]
 		},
 		"1127/TraceAsset.sol": {
@@ -409,19 +482,19 @@
 			]
 		},
 		"1127/util/AccessControl.sol": {
-			"keccak256": "0x92e70c76864d88a5ee5ff4a834bb2ec3b4842543bd5841408352b4eb5b4aaf75",
+			"keccak256": "0xedec336484228c4d15d067f26068987542e887cf2474c5033d8574bc3e2945e2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e1e299750c37535cda14c05fab46438caf37c0a506956e2fe697356128faab64",
-				"dweb:/ipfs/QmdKkxsUNp5WcY3LTt8MQzWMNodA7sAPPzR44qirzWgqRy"
+				"bzz-raw://3687a464e5f79e6d56034123e371eb56c204a90a9eac811fb0d88894f0a9db1a",
+				"dweb:/ipfs/QmQZN6Mg3kLNH2UF2dnuhS56i6h9HA2JpMU8QkLwo3b2zj"
 			]
 		},
-		"1127/util/BytesUtil.sol": {
-			"keccak256": "0x4838e043649f4512ab04de03dc671bbabc101e344886c61f21633c45708ec2b5",
+		"1127/util/CommonUtil.sol": {
+			"keccak256": "0xcc4e32f5b417864db43bd63d3b5cd72674bdde99dc71b11027904f89a9b1c609",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5189a54ebbd475e75a2edf6334943ef73e30cc7fd77efc04e1685346a592a923",
-				"dweb:/ipfs/QmSZG3Gfg4G9VTXB5js8wXiXqA8Z5fJ2cL5dpzWKkGixrb"
+				"bzz-raw://09128bb4c78c78355819a2f7bdafd3d6f6e410b3fc0fa8114449faae3e097599",
+				"dweb:/ipfs/Qmc1NQmDbrEnMAr4wYG5SRSwZSQoZcfamTR4vY3FCuMwwa"
 			]
 		}
 	},
