@@ -24,6 +24,7 @@ library DataStruct {
     struct AssetTrace{
         AssetMetadata asset;
         uint256 operateTime;
+        address operator;
         string operateMsg;
     }
 

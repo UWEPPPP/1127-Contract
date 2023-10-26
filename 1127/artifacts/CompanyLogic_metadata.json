@@ -26,7 +26,7 @@
 						"type": "string"
 					}
 				],
-				"name": "NewAssetGroupAdd",
+				"name": "NewAssetGroupClose",
 				"type": "event"
 			},
 			{
@@ -45,7 +45,7 @@
 						"type": "string"
 					}
 				],
-				"name": "NewAssetGroupClose",
+				"name": "NewAssetGroupOpen",
 				"type": "event"
 			},
 			{
@@ -53,9 +53,9 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "did",
-						"type": "string"
+						"internalType": "address",
+						"name": "worker_address",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -72,9 +72,9 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "did",
-						"type": "string"
+						"internalType": "address",
+						"name": "worker_address",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -247,11 +247,6 @@
 				"inputs": [
 					{
 						"internalType": "string",
-						"name": "worker_did",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
 						"name": "_groupName",
 						"type": "string"
 					},
@@ -337,6 +332,35 @@
 			{
 				"inputs": [
 					{
+						"internalType": "string",
+						"name": "_contract",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_function",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_msg",
+						"type": "string"
+					}
+				],
+				"name": "error",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "bytes32",
 						"name": "role",
 						"type": "bytes32"
@@ -381,13 +405,8 @@
 								"type": "uint256"
 							},
 							{
-								"internalType": "uint256",
-								"name": "updatedAt",
-								"type": "uint256"
-							},
-							{
 								"internalType": "address",
-								"name": "operator",
+								"name": "creator",
 								"type": "address"
 							},
 							{
@@ -396,12 +415,12 @@
 								"type": "bool"
 							}
 						],
-						"internalType": "struct DataStruct.Asset",
+						"internalType": "struct DataStruct.AssetMetadata",
 						"name": "",
 						"type": "tuple"
 					}
 				],
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -468,9 +487,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
-						"name": "worker_did",
-						"type": "string"
+						"internalType": "address",
+						"name": "worker_address",
+						"type": "address"
 					}
 				],
 				"name": "removedWorker",
@@ -512,6 +531,30 @@
 				"inputs": [
 					{
 						"internalType": "string",
+						"name": "_a",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_b",
+						"type": "string"
+					}
+				],
+				"name": "strConcat",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
 						"name": "str",
 						"type": "string"
 					}
@@ -522,6 +565,30 @@
 						"internalType": "bytes32",
 						"name": "",
 						"type": "bytes32"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_group",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "toAssetIndex",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
 					}
 				],
 				"stateMutability": "pure",
@@ -585,12 +652,12 @@
 			"kind": "user",
 			"methods": {
 				"addDataGroup(string)": {
-					"notice": "增加数据组 (admin)*"
+					"notice": "启用数据组 (admin)*"
 				},
 				"addDataInGroup(string,string)": {
 					"notice": "添加数据 （指定组Worker）*"
 				},
-				"addWorker(string,string,address)": {
+				"addWorker(string,address)": {
 					"notice": "添加员工(到指定组) (admin)*"
 				},
 				"closeDataGroup(string)": {
@@ -602,8 +669,14 @@
 				"getSingleDataInGroup(string,uint256)": {
 					"notice": "获取单个AssetData*"
 				},
-				"removedWorker(string)": {
+				"removedWorker(address)": {
 					"notice": "删除员工 (admin)*"
+				},
+				"stringToBytes32(string)": {
+					"notice": "通用工具区*"
+				},
+				"toRole(string)": {
+					"notice": "业务工具区*"
 				},
 				"updateDataInGroup(string,uint256,string)": {
 					"notice": "更新数据 （指定组Worker）*"
@@ -629,27 +702,27 @@
 	},
 	"sources": {
 		"1127/CompanyLogic.sol": {
-			"keccak256": "0x774227628d86fffd0b332ab24e55afed16c142f2d00e9522a00ab33f7688b38d",
+			"keccak256": "0x1d4d935dc78df42a839aa40118abca13086afc53cde79b9c423aeb17d4cda060",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d0f656ab456cb5176bcb4efd5924750c20fa797cca2c60a1352004cfc3535b02",
-				"dweb:/ipfs/Qmbyc5wL1Souqxbva2shqzJVF8zKALDc2ymH7PSGbFKZr6"
+				"bzz-raw://980172e2ec8bf3e36ab040fffa84605877c18841b7002f8d2de234cf7724a052",
+				"dweb:/ipfs/QmP9Vt2n6Awoi7YZiFjhUpkSQ6BmnWKrMxGCdMt3WvwKP7"
 			]
 		},
 		"1127/DataStruct.sol": {
-			"keccak256": "0xd8b017b69e27af6ead2abf7b6e4d7f29a0acb60baaf99416128902598d59f73e",
+			"keccak256": "0x5b3daafe11fb26d67a1b4424004e5001d8d6a8a4287d2e08db56f19a3a5dba8b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0f2392e12a13b4cff0b7960c4563879f6664da90943ca79da8aaebc89d73494f",
-				"dweb:/ipfs/QmaxGWWJG7sCpUPBhbzf26gi4T94pE2uXgeLzwxnf1BzCo"
+				"bzz-raw://f736eba09d812a7378ce57c968e1a1abfec1cb5136143b2d880ee2e6d8813d2c",
+				"dweb:/ipfs/QmU35V5gCuNsC4RS7CSQNGGoxRLn553FxJc778hw2pSTvn"
 			]
 		},
 		"1127/TraceAsset.sol": {
-			"keccak256": "0x07c54fd601bd08c070e8243686a1d029fdb7eaef173f2880493c8477bab52e3d",
+			"keccak256": "0xf5f5b8927f54d341a520daf94fd356984c49bdefcf7176071e392f3e7d8a4776",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e1bf2b970c18576405dbb9c59257dcdede7ba3a3dc675fd1a7bf015a43c637f7",
-				"dweb:/ipfs/QmeGo42NPoGPgdP1LrDN3FNYmeudutgBNSXPUHkrA6Wu7A"
+				"bzz-raw://f197a0361b67ea23788b83424b845ff1922d92a44160babde9caae1b41123e22",
+				"dweb:/ipfs/QmNed4EagSXhpQGR595f71bdfTJz94cjnB4iN7JTrmgEeQ"
 			]
 		},
 		"1127/util/AccessControl.sol": {
@@ -660,12 +733,28 @@
 				"dweb:/ipfs/QmQZN6Mg3kLNH2UF2dnuhS56i6h9HA2JpMU8QkLwo3b2zj"
 			]
 		},
-		"1127/util/BytesUtil.sol": {
-			"keccak256": "0x4838e043649f4512ab04de03dc671bbabc101e344886c61f21633c45708ec2b5",
+		"1127/util/CommonUtil.sol": {
+			"keccak256": "0x63c031af59058d98c70fdef1050457c12bc4675992f4206b6931f5f4d683e892",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5189a54ebbd475e75a2edf6334943ef73e30cc7fd77efc04e1685346a592a923",
-				"dweb:/ipfs/QmSZG3Gfg4G9VTXB5js8wXiXqA8Z5fJ2cL5dpzWKkGixrb"
+				"bzz-raw://248a8cccf59251b8b72f28c7844bcdc20616dfa2f6ee3521e46fb68859995d7b",
+				"dweb:/ipfs/QmZg3wV9WRiJ1b82VRwaGtSyPZoEGQnvFYNJsZ3CvmNLLk"
+			]
+		},
+		"1127/util/Math.sol": {
+			"keccak256": "0x6d790b2a3a4c6fb5d7901e09c098663bad705b1681e7fe17718b057675cf5b47",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8998c4532df28dd49346ee7a8078db7f03df2f768b4046488e62fc9c447edc08",
+				"dweb:/ipfs/QmcSNYLnPJUNGrjE1uLsYUFwsz1JBQcAVyEcMJ8jVCndQT"
+			]
+		},
+		"1127/util/SignedMath.sol": {
+			"keccak256": "0xcd190ec50c58eef78381c5cad6dc71c2dcbb104fbb15eb9f412d8c71c77f8191",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://511f09b21404b420a7a31eedf3367168565f173384a8f2b8579e9897c310c173",
+				"dweb:/ipfs/QmQnY9XT1TQ244s7cfMk22AWDv4oSUyNzZkWaDofoD6AnB"
 			]
 		}
 	},

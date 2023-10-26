@@ -92,7 +92,7 @@ contract CompanyLogic is AccessControl,CommonUtil {
          dataGroupList[_group].assetSize = size;
          dataGroupList[_group].assets[size] = asset;
          // strConcat(_group,toString(size)) 拼凑字符串
-         _trace.add(toAssetIndex(_group, size),DataStruct.AssetTrace(asset,block.timestamp,"Create"));
+         _trace.add(toAssetIndex(_group, size),DataStruct.AssetTrace(asset,block.timestamp,msg.sender,"Create"));
          return true;
     }
 
@@ -104,7 +104,7 @@ contract CompanyLogic is AccessControl,CommonUtil {
           require(dataGroupList[_group].isOpen, error("CompanyLogic", "getSingleDataInGroup", "Group isn't exist"));
           require(dataGroupList[_group].assets[id].isPublic, error("CompanyLogic", "getSingleDataInGroup", "Asset have closed"));
           DataStruct.AssetMetadata memory asset =dataGroupList[_group].assets[id];
-          _trace.add(toAssetIndex(_group, id),DataStruct.AssetTrace(asset,block.timestamp,"BeGet"));
+          _trace.add(toAssetIndex(_group, id),DataStruct.AssetTrace(asset,block.timestamp,msg.sender,"BeGet"));
           return  dataGroupList[_group].assets[id];
     }
 
@@ -117,7 +117,7 @@ contract CompanyLogic is AccessControl,CommonUtil {
          require(dataGroupList[_group].assets[id].isPublic, error("CompanyLogic", "updateDataInGroup", "Has been deleted"));
          dataGroupList[_group].assets[id].cid = _dataCid;
          DataStruct.AssetMetadata memory asset =dataGroupList[_group].assets[id];
-          _trace.add(toAssetIndex(_group, id),DataStruct.AssetTrace(asset,block.timestamp,"Update"));
+          _trace.add(toAssetIndex(_group, id),DataStruct.AssetTrace(asset,block.timestamp,msg.sender,"Update"));
          return true;
     }
 
@@ -132,7 +132,7 @@ contract CompanyLogic is AccessControl,CommonUtil {
          dataGroupList[_group].assets[id].creator = address(0);
          dataGroupList[_group].assets[id].isPublic = false;
          DataStruct.AssetMetadata memory asset =dataGroupList[_group].assets[id];
-          _trace.add(toAssetIndex(_group, id),DataStruct.AssetTrace(asset,block.timestamp,"Delete"));
+          _trace.add(toAssetIndex(_group, id),DataStruct.AssetTrace(asset,block.timestamp,msg.sender,"Delete"));
          return true;
     }
 
