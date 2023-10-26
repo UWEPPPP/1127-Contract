@@ -508,11 +508,11 @@
 			]
 		},
 		"1127/DataStruct.sol": {
-			"keccak256": "0x5b3daafe11fb26d67a1b4424004e5001d8d6a8a4287d2e08db56f19a3a5dba8b",
+			"keccak256": "0xefcaf18c4376cb268ec58230940737d43e040d81d2d9fe32730ed2543d1d9b36",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f736eba09d812a7378ce57c968e1a1abfec1cb5136143b2d880ee2e6d8813d2c",
-				"dweb:/ipfs/QmU35V5gCuNsC4RS7CSQNGGoxRLn553FxJc778hw2pSTvn"
+				"bzz-raw://863f57e76c4f1119dfdd5be1d839bd869c22e415ffb225f4deb7755aeccad476",
+				"dweb:/ipfs/QmWSKYfA7pWAemRPNinsyPjEB7vU4Lb6XPcQsbzZVJHYZi"
 			]
 		},
 		"1127/TraceAsset.sol": {

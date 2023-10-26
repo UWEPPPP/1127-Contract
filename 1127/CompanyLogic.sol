@@ -36,7 +36,7 @@ contract CompanyLogic is AccessControl,CommonUtil {
         require(dataGroupList[_groupName].isOpen, error("CompanyLogic", "addWorker", "No group found"));
         require(!hasRole(groupRole, worker_address), error("CompanyLogic", "addWorker", "worker has been added"));
         grantRole(groupRole, worker_address);
-        workerList[worker_address] = DataStruct.Worker(worker_address, groupRole);
+        workerList[worker_address] = DataStruct.Worker(groupRole);
         emit NewWorkerAdd(worker_address, company_name);
         return true;
     }
@@ -47,10 +47,10 @@ contract CompanyLogic is AccessControl,CommonUtil {
     function removedWorker(address worker_address) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool) {
         
         DataStruct.Worker memory _removedWorker = workerList[worker_address];
-        require(hasRole(_removedWorker.group, _removedWorker.addr), error("CompanyLogic", "removedWorker", "The Worker No Found"));
-        revokeRole(_removedWorker.group, _removedWorker.addr);
+        require(hasRole(_removedWorker.group, worker_address), error("CompanyLogic", "removedWorker", "The Worker No Found"));
+        revokeRole(_removedWorker.group, worker_address);
         workerList[worker_address] = DataStruct.Worker(
-             address(0), BE_FIRED_ROLE
+             BE_FIRED_ROLE
         );
         emit NewWorkerRemoved(worker_address, company_name);
         return true;
@@ -91,7 +91,6 @@ contract CompanyLogic is AccessControl,CommonUtil {
          DataStruct.AssetMetadata memory asset = DataStruct.AssetMetadata(_dataCid, block.timestamp, msg.sender, true);
          dataGroupList[_group].assetSize = size;
          dataGroupList[_group].assets[size] = asset;
-         // strConcat(_group,toString(size)) 拼凑字符串
          _trace.add(toAssetIndex(_group, size),DataStruct.AssetTrace(asset,block.timestamp,msg.sender,"Create"));
          return true;
     }

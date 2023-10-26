@@ -29,7 +29,6 @@ library DataStruct {
     }
 
     struct Worker {
-        address addr;
         bytes32 group;
     }
 
