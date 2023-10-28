@@ -7,7 +7,7 @@ import "1127/DataStruct.sol";
 import "1127/TraceAsset.sol";
 
 contract CompanyLogic is AccessControl,CommonUtil {
-    TraceAsset private _trace;
+   TraceAsset private _trace;
 
     address private admin;
     address private implementationAddress;
@@ -17,23 +17,42 @@ contract CompanyLogic is AccessControl,CommonUtil {
     bytes32 public constant BE_FIRED_ROLE = keccak256("Fired");
 
     mapping (address => DataStruct.Worker) private workerList;
-    mapping (string => DataStruct.AssetGroup) private dataGroupList;
-    mapping (uint256 => DataStruct.AssetTrace[]) private traceList;
+
+    // 资产总数
+    uint256 public assetCount;
+    // id => AssetMateData
+    mapping (uint256 => DataStruct.AssetMetadata) private assetList;
+    // 用于判断是否有重复的cid
+    mapping (string => bool) cidIsValid;
+    // 记录创建资产事件
+    event LogCreateAsset(address indexed creator,uint256 indexed groupId,string assetName,uint256 createTime,string encodeCid);
 
     event NewWorkerAdd(address worker_address, string company_name);
     event NewWorkerRemoved(address worker_address, string company_name);
-    event NewAssetGroupOpen(string groupName, string company_name);
-    event NewAssetGroupClose(string groupName, string company_name);
 
     constructor() AccessControl(msg.sender) {}
+
+    /**
+     * 判断有无重复cid
+     */
+    modifier checkCid(string memory _cid){
+        require(!cidIsValid[_cid],"CompanyLogic::CheckCid:: cid is invalid");
+        _;
+    }
+
+    /**
+     * 检查asset有效性
+     */
+    modifier checkAssetValid(uint id){
+        require(assetList[id].isValid,"CompanyLogic::CheckAssetValid:: asset is invalid");
+        _;
+    }
 
     /**
     添加员工(到指定组) (admin)
     **/
     function addWorker(string memory _groupName, address worker_address) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool)  {
-        
         bytes32 groupRole = toRole(_groupName);
-        require(dataGroupList[_groupName].isOpen, error("CompanyLogic", "addWorker", "No group found"));
         require(!hasRole(groupRole, worker_address), error("CompanyLogic", "addWorker", "worker has been added"));
         grantRole(groupRole, worker_address);
         workerList[worker_address] = DataStruct.Worker(worker_address, groupRole);
@@ -45,7 +64,6 @@ contract CompanyLogic is AccessControl,CommonUtil {
     删除员工 (admin)
     **/
     function removedWorker(address worker_address) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool) {
-        
         DataStruct.Worker memory _removedWorker = workerList[worker_address];
         require(hasRole(_removedWorker.group, _removedWorker.addr), error("CompanyLogic", "removedWorker", "The Worker No Found"));
         revokeRole(_removedWorker.group, _removedWorker.addr);
@@ -57,86 +75,77 @@ contract CompanyLogic is AccessControl,CommonUtil {
     }
 
     /**
-    启用数据组 (admin)
-    **/
-    function addDataGroup(string memory _groupName) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool) {
-        
-        require(!dataGroupList[_groupName].isOpen, error("CompanyLogic", "addworker", "The group has exist"));
-        dataGroupList[_groupName].isOpen = true;
-        setRoleAdmin(toRole(_groupName), ADMIN_ROLE);
-        grantRole(toRole(_groupName), admin);
-        emit NewAssetGroupOpen(_groupName, company_name);
-        return true;
+     * 添加数据资产
+     */
+    function addAsset(
+            string memory _encodeCid,
+            string memory _name,
+            uint256 _groupId
+        ) public AccessControl.onlyRole(ADMIN_ROLE) checkCid(_encodeCid) {
+        DataStruct.AssetMetadata memory data = DataStruct.AssetMetadata({
+            encodeCid: _encodeCid,
+            name: _name,
+            createdAt: block.timestamp,
+            creator: msg.sender,
+            groupId: _groupId,
+            traceCount: 0,
+            isValid: true
+        });
+
+        assetList[assetCount] = data;
+        // 添加追溯信息
+        DataStruct.AssetTrace memory traceNode = DataStruct.AssetTrace(data.createdAt,msg.sender,"create");
+        _trace.add(assetCount,traceNode);
+        ++assetCount;
+        emit LogCreateAsset(msg.sender,_groupId,_name,data.createdAt,_encodeCid);
     }
 
     /**
-    关闭数据组 (admin)
-    **/
-    function closeDataGroup(string memory _groupName) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool) {
-        
-        require(!dataGroupList[_groupName].isOpen, error("CompanyLogic", "closeDataGroup", "The group has been close"));
-        dataGroupList[_groupName].isOpen = false;
-        emit NewAssetGroupClose(_groupName, company_name);
-        return true;
+     * 获取单个AssetData
+     */
+    function getAsset(uint256 id) public view checkAssetValid(id) returns (DataStruct.AssetMetadata memory) {
+        return assetList[id];
     }
 
     /**
-    添加数据 （指定组Worker）
-    **/
-    function addDataInGroup(string memory _group, string memory _dataCid) public AccessControl.onlyRole(toRole(_group)) returns (bool) {
-         
-         require(dataGroupList[_group].isOpen, error("CompanyLogic", "addworker", "No group found"));
-         uint256 size = dataGroupList[_group].assetSize;
-         size++;
-         DataStruct.AssetMetadata memory asset = DataStruct.AssetMetadata(_dataCid, block.timestamp, msg.sender, true);
-         dataGroupList[_group].assetSize = size;
-         dataGroupList[_group].assets[size] = asset;
-         // strConcat(_group,toString(size)) 拼凑字符串
-         _trace.add(toAssetIndex(_group, size),DataStruct.AssetTrace(asset,block.timestamp,msg.sender,"Create"));
-         return true;
+     * 更新数据
+     */
+    function updateGroup(uint256 id,uint256 _groupId) public AccessControl.onlyRole(ADMIN_ROLE) checkAssetValid(id){
+        DataStruct.AssetMetadata memory data = assetList[id];
+
+        data.groupId = _groupId;
+        assetList[id] = data;
+
+        // 记录
+        DataStruct.AssetTrace memory traceNode = DataStruct.AssetTrace(block.timestamp,msg.sender,strConcat("update groupId to",toString(_groupId)));
+        _trace.add(id,traceNode);
     }
 
     /**
-    获取单个AssetData
-    **/
-    function getSingleDataInGroup(string memory _group, uint256 id ) public  AccessControl.onlyRole(toRole(_group)) returns (DataStruct.AssetMetadata memory) {
-          
-          require(dataGroupList[_group].isOpen, error("CompanyLogic", "getSingleDataInGroup", "Group isn't exist"));
-          require(dataGroupList[_group].assets[id].isPublic, error("CompanyLogic", "getSingleDataInGroup", "Asset have closed"));
-          DataStruct.AssetMetadata memory asset =dataGroupList[_group].assets[id];
-          _trace.add(toAssetIndex(_group, id),DataStruct.AssetTrace(asset,block.timestamp,msg.sender,"BeGet"));
-          return  dataGroupList[_group].assets[id];
+     * 删除数据
+     */
+    function deleteAsset(uint256 id) public AccessControl.onlyRole(ADMIN_ROLE) checkAssetValid(id){
+         DataStruct.AssetMetadata memory data = assetList[id];
+
+        data.isValid = false;
+        assetList[id] = data;
+
+        // 记录
+        DataStruct.AssetTrace memory traceNode = DataStruct.AssetTrace(block.timestamp,msg.sender,strConcat("delete asset,id: ",toString(id)));
+        _trace.add(id,traceNode);
     }
 
     /**
-    更新数据 （指定组Worker）
-    **/
-    function updateDataInGroup(string memory _group, uint256 id, string memory _dataCid) public AccessControl.onlyRole(toRole(_group)) returns (bool) {
-         
-         require(dataGroupList[_group].isOpen, error("CompanyLogic", "updateDataInGroup", "No group found"));
-         require(dataGroupList[_group].assets[id].isPublic, error("CompanyLogic", "updateDataInGroup", "Has been deleted"));
-         dataGroupList[_group].assets[id].cid = _dataCid;
-         DataStruct.AssetMetadata memory asset =dataGroupList[_group].assets[id];
-          _trace.add(toAssetIndex(_group, id),DataStruct.AssetTrace(asset,block.timestamp,msg.sender,"Update"));
-         return true;
-    }
-
-    /**
-    删除数据 （指定组Worker）
-    **/
-    function deleteDataInGroup(string memory _group, uint256 id) public AccessControl.onlyRole(toRole(_group)) returns (bool) {
-         
-         require(dataGroupList[_group].isOpen, error("CompanyLogic", "deleteDataInGroup", "No group found"));
-         require(dataGroupList[_group].assets[id].isPublic, error("CompanyLogic", "deleteDataInGroup", "Has been deleted"));
-         dataGroupList[_group].assets[id].cid = "";
-         dataGroupList[_group].assets[id].creator = address(0);
-         dataGroupList[_group].assets[id].isPublic = false;
-         DataStruct.AssetMetadata memory asset =dataGroupList[_group].assets[id];
-          _trace.add(toAssetIndex(_group, id),DataStruct.AssetTrace(asset,block.timestamp,msg.sender,"Delete"));
-         return true;
-    }
-
+     * 获取追溯合约地址
+     */
     function getTraceAddr() public view returns(address) {
         return address(_trace);
-     }
+    }
+
+    /**
+     * 获取assetCount
+     */
+    function getAssetCount() public view returns(uint256){
+        return assetCount;
+    }
 }
