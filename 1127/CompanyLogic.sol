@@ -52,6 +52,7 @@ contract CompanyLogic is AccessControl,CommonUtil {
     function addWorker(string memory _groupName, address worker_address) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool)  {
         bytes32 groupRole = toRole(_groupName);
         require(!hasRole(groupRole, worker_address), error("CompanyLogic", "addWorker", "worker has been added"));
+        setRoleAdmin(groupRole,ADMIN_ROLE);
         grantRole(groupRole, worker_address);
         workerList[worker_address] = DataStruct.Worker(groupRole);
         emit NewWorkerAdd(worker_address, company_name);
