@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
 
-import  "1127/util/CommonUtil.sol";
-import "1127/util/AccessControl.sol";
-import "1127/DataStruct.sol";
-import "1127/TraceAsset.sol";
+import  "./CommonUtil.sol";
+import "./TraceAsset.sol";
 
 contract CompanyLogic is AccessControl,CommonUtil {
    TraceAsset private _trace;
@@ -55,7 +53,7 @@ contract CompanyLogic is AccessControl,CommonUtil {
         bytes32 groupRole = toRole(_groupName);
         require(!hasRole(groupRole, worker_address), error("CompanyLogic", "addWorker", "worker has been added"));
         grantRole(groupRole, worker_address);
-        workerList[worker_address] = DataStruct.Worker(worker_address, groupRole);
+        workerList[worker_address] = DataStruct.Worker(groupRole);
         emit NewWorkerAdd(worker_address, company_name);
         return true;
     }
@@ -65,10 +63,10 @@ contract CompanyLogic is AccessControl,CommonUtil {
     **/
     function removedWorker(address worker_address) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool) {
         DataStruct.Worker memory _removedWorker = workerList[worker_address];
-        require(hasRole(_removedWorker.group, _removedWorker.addr), error("CompanyLogic", "removedWorker", "The Worker No Found"));
-        revokeRole(_removedWorker.group, _removedWorker.addr);
+        require(hasRole(_removedWorker.group, worker_address), error("CompanyLogic", "removedWorker", "The Worker No Found"));
+        revokeRole(_removedWorker.group, worker_address);
         workerList[worker_address] = DataStruct.Worker(
-             address(0), BE_FIRED_ROLE
+             BE_FIRED_ROLE
         );
         emit NewWorkerRemoved(worker_address, company_name);
         return true;
@@ -108,6 +106,19 @@ contract CompanyLogic is AccessControl,CommonUtil {
     }
 
     /**
+    添加数据 （指定组Worker）
+    **/
+    function addDataInGroup(string memory _group, string memory _dataCid) public AccessControl.onlyRole(toRole(_group)) returns (bool) {
+         
+         require(dataGroupList[_group].isOpen, error("CompanyLogic", "addworker", "No group found"));
+         uint256 size = dataGroupList[_group].assetSize;
+         size++;
+         DataStruct.AssetMetadata memory asset = DataStruct.AssetMetadata(_dataCid, block.timestamp, msg.sender, true);
+         dataGroupList[_group].assetSize = size;
+         dataGroupList[_group].assets[size] = asset;
+         _trace.add(toAssetIndex(_group, size),DataStruct.AssetTrace(asset,block.timestamp,msg.sender,"Create"));
+         return true;
+}
      * 更新数据
      */
     function updateGroup(uint256 id,uint256 _groupId) public AccessControl.onlyRole(ADMIN_ROLE) checkAssetValid(id){
@@ -119,6 +130,7 @@ contract CompanyLogic is AccessControl,CommonUtil {
         // 记录
         DataStruct.AssetTrace memory traceNode = DataStruct.AssetTrace(block.timestamp,msg.sender,strConcat("update groupId to",toString(_groupId)));
         _trace.add(id,traceNode);
+
     }
 
     /**

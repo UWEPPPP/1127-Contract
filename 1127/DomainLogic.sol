@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
-import "1127/util/AccessControl.sol";
-import "1127/CompanyProxy.sol";
-import "1127/DataStruct.sol";
+import "./CompanyProxy.sol";
 contract DomainContract is AccessControl,CommonUtil{
     address private  _commonlogicContract; 
     bytes32 public constant DOMAIN_ADMIN = keccak256("Domain_ADMIN");
