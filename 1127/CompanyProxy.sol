@@ -3,7 +3,7 @@ pragma solidity 0.8.11;
 import  "./CommonUtil.sol";
 import "./TraceAsset.sol";
 contract CompanyProxy is AccessControl,CommonUtil {
-    TraceAsset private _trace;
+   TraceAsset private _trace;
 
     address private admin;
     address private implementationAddress;
@@ -13,17 +13,21 @@ contract CompanyProxy is AccessControl,CommonUtil {
     bytes32 public constant BE_FIRED_ROLE = keccak256("Fired");
 
     mapping (address => DataStruct.Worker) private workerList;
-    mapping (string => DataStruct.AssetGroup) private dataGroupList;
-    mapping (uint256 => DataStruct.AssetTrace[]) private traceList;
+
+    // 资产总数
+    uint256 public assetCount;
+    // id => AssetMateData
+    mapping (uint256 => DataStruct.AssetMetadata) private assetList;
+    // 用于判断是否有重复的cid
+    mapping (string => bool) cidIsValid;
+    // 记录创建资产事件
+    event LogCreateAsset(address indexed creator,uint256 indexed groupId,string assetName,uint256 createTime,string encodeCid);
 
     event NewWorkerAdd(address worker_address, string company_name);
     event NewWorkerRemoved(address worker_address, string company_name);
-    event NewAssetGroupOpen(string groupName, string company_name);
-    event NewAssetGroupClose(string groupName, string company_name);
     
-    
-     constructor(address founder,string memory _company_name,address commonLogicAddress) AccessControl(msg.sender){
-        _trace=new TraceAsset();
+    constructor(address founder,string memory _company_name,address commonLogicAddress) AccessControl(msg.sender){
+        _trace = new TraceAsset();
         admin = founder;
         setRoleAdmin(ADMIN_ROLE,DEFAULT_ADMIN);
         grantRole(ADMIN_ROLE, founder);

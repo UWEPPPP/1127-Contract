@@ -8,31 +8,33 @@ library DataStruct {
         string name;
     }
 
-    struct AssetGroup {
-        mapping(uint256 => AssetMetadata) assets;
-        uint256 assetSize;
-        bool isOpen;
-    }
-
     struct AssetMetadata {
-        string cid;
+        // ipfs标识
+        string encodeCid;
+        // 数据名称
+        string name;
+        // 创建时间
         uint256 createdAt;
+        // 创建者地址
         address creator;
-        bool isPublic;
+        // 数据分组id
+        uint256 groupId;
+        // 追溯记录数量
+        uint256 traceCount;
+        // 数据有效性
+        bool isValid;
     }
 
     struct AssetTrace{
-        AssetMetadata asset;
+        // 操作时间戳
         uint256 operateTime;
+        // 操作人地址
         address operator;
+        // 操作信息
         string operateMsg;
     }
 
     struct Worker {
         bytes32 group;
     }
-
-   
-     
-
 }
