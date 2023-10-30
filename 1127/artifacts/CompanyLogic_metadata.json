@@ -14,19 +14,37 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "groupName",
-						"type": "string"
+						"indexed": true,
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "groupId",
+						"type": "uint256"
 					},
 					{
 						"indexed": false,
 						"internalType": "string",
-						"name": "company_name",
+						"name": "assetName",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "createTime",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "encodeCid",
 						"type": "string"
 					}
 				],
-				"name": "NewAssetGroupAdd",
+				"name": "LogCreateAsset",
 				"type": "event"
 			},
 			{
@@ -34,28 +52,9 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "groupName",
-						"type": "string"
-					},
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "company_name",
-						"type": "string"
-					}
-				],
-				"name": "NewAssetGroupClose",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "did",
-						"type": "string"
+						"internalType": "address",
+						"name": "worker_address",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -72,9 +71,9 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "did",
-						"type": "string"
+						"internalType": "address",
+						"name": "worker_address",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -204,52 +203,27 @@
 				"inputs": [
 					{
 						"internalType": "string",
-						"name": "_groupName",
+						"name": "_encodeCid",
 						"type": "string"
-					}
-				],
-				"name": "addDataGroup",
-				"outputs": [
+					},
 					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_groupId",
+						"type": "uint256"
 					}
 				],
+				"name": "addAsset",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_group",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_dataCid",
-						"type": "string"
-					}
-				],
-				"name": "addDataInGroup",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "worker_did",
-						"type": "string"
-					},
 					{
 						"internalType": "string",
 						"name": "_groupName",
@@ -270,6 +244,19 @@
 					}
 				],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "assetCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -294,19 +281,13 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
-						"name": "_groupName",
-						"type": "string"
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
 					}
 				],
-				"name": "closeDataGroup",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
+				"name": "deleteAsset",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -314,24 +295,98 @@
 				"inputs": [
 					{
 						"internalType": "string",
-						"name": "_group",
+						"name": "_contract",
 						"type": "string"
 					},
+					{
+						"internalType": "string",
+						"name": "_function",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_msg",
+						"type": "string"
+					}
+				],
+				"name": "error",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
 					{
 						"internalType": "uint256",
 						"name": "id",
 						"type": "uint256"
 					}
 				],
-				"name": "deleteDataInGroup",
+				"name": "getAsset",
 				"outputs": [
 					{
-						"internalType": "bool",
+						"components": [
+							{
+								"internalType": "string",
+								"name": "encodeCid",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "createdAt",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "creator",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "groupId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "traceCount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "isValid",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct DataStruct.AssetMetadata",
 						"name": "",
-						"type": "bool"
+						"type": "tuple"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAssetCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -348,57 +403,6 @@
 						"internalType": "bytes32",
 						"name": "",
 						"type": "bytes32"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_group",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					}
-				],
-				"name": "getSingleDataInGroup",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "string",
-								"name": "cid",
-								"type": "string"
-							},
-							{
-								"internalType": "uint256",
-								"name": "createdAt",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "updatedAt",
-								"type": "uint256"
-							},
-							{
-								"internalType": "address",
-								"name": "operator",
-								"type": "address"
-							},
-							{
-								"internalType": "bool",
-								"name": "isPublic",
-								"type": "bool"
-							}
-						],
-						"internalType": "struct DataStruct.Asset",
-						"name": "",
-						"type": "tuple"
 					}
 				],
 				"stateMutability": "view",
@@ -468,9 +472,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
-						"name": "worker_did",
-						"type": "string"
+						"internalType": "address",
+						"name": "worker_address",
+						"type": "address"
 					}
 				],
 				"name": "removedWorker",
@@ -512,6 +516,30 @@
 				"inputs": [
 					{
 						"internalType": "string",
+						"name": "_a",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_b",
+						"type": "string"
+					}
+				],
+				"name": "strConcat",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
 						"name": "str",
 						"type": "string"
 					}
@@ -522,6 +550,30 @@
 						"internalType": "bytes32",
 						"name": "",
 						"type": "bytes32"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_group",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "toAssetIndex",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
 					}
 				],
 				"stateMutability": "pure",
@@ -549,29 +601,18 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
-						"name": "_group",
-						"type": "string"
-					},
-					{
 						"internalType": "uint256",
 						"name": "id",
 						"type": "uint256"
 					},
 					{
-						"internalType": "string",
-						"name": "_dataCid",
-						"type": "string"
+						"internalType": "uint256",
+						"name": "_groupId",
+						"type": "uint256"
 					}
 				],
-				"name": "updateDataInGroup",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
+				"name": "updateGroup",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			}
@@ -584,29 +625,35 @@
 		"userdoc": {
 			"kind": "user",
 			"methods": {
-				"addDataGroup(string)": {
-					"notice": "增加数据组 (admin)*"
+				"addAsset(string,string,uint256)": {
+					"notice": "添加数据资产"
 				},
-				"addDataInGroup(string,string)": {
-					"notice": "添加数据 （指定组Worker）*"
-				},
-				"addWorker(string,string,address)": {
+				"addWorker(string,address)": {
 					"notice": "添加员工(到指定组) (admin)*"
 				},
-				"closeDataGroup(string)": {
-					"notice": "关闭数据组 (admin)*"
+				"deleteAsset(uint256)": {
+					"notice": "删除数据"
 				},
-				"deleteDataInGroup(string,uint256)": {
-					"notice": "删除数据 （指定组Worker）*"
+				"getAsset(uint256)": {
+					"notice": "获取单个AssetData"
 				},
-				"getSingleDataInGroup(string,uint256)": {
-					"notice": "获取单个AssetData*"
+				"getAssetCount()": {
+					"notice": "获取assetCount"
 				},
-				"removedWorker(string)": {
+				"getTraceAddr()": {
+					"notice": "获取追溯合约地址"
+				},
+				"removedWorker(address)": {
 					"notice": "删除员工 (admin)*"
 				},
-				"updateDataInGroup(string,uint256,string)": {
-					"notice": "更新数据 （指定组Worker）*"
+				"stringToBytes32(string)": {
+					"notice": "通用工具区*"
+				},
+				"toRole(string)": {
+					"notice": "业务工具区*"
+				},
+				"updateGroup(uint256,uint256)": {
+					"notice": "更新数据*"
 				}
 			},
 			"version": 1
@@ -628,44 +675,60 @@
 		"remappings": []
 	},
 	"sources": {
-		"1127/CompanyLogic.sol": {
-			"keccak256": "0x774227628d86fffd0b332ab24e55afed16c142f2d00e9522a00ab33f7688b38d",
+		"1127/AccessControl.sol": {
+			"keccak256": "0x4f5532c72a63dfb39499dd33a659742f3f5849ed6fa48dd56c1a59398eb1c5c9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d0f656ab456cb5176bcb4efd5924750c20fa797cca2c60a1352004cfc3535b02",
-				"dweb:/ipfs/Qmbyc5wL1Souqxbva2shqzJVF8zKALDc2ymH7PSGbFKZr6"
+				"bzz-raw://170068f82a8f7cb0cbf7ef0cfbbb716078ef55db308c5cf85624bf4cce4f643c",
+				"dweb:/ipfs/QmbFfgiMbE164gepgfPgUfZ2XHpGXhqdo5n3G9ZRKV77nT"
+			]
+		},
+		"1127/CommonUtil.sol": {
+			"keccak256": "0x751bbff5d2479761eea1a1aeb14e0b96789d614f105718a1395a5c86a2faca00",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://966ee1000bb9cd4ac17df7e51e64fb4d67671606ed1cc9750d44a6eb3fd6a53e",
+				"dweb:/ipfs/QmcBAuy49CuKuo4oERsRQ2RyF6vEgtgi2JG4ch1WAmwATz"
+			]
+		},
+		"1127/CompanyLogic.sol": {
+			"keccak256": "0x73943291c894c169ee0e978b497d3fe44528586a7f5c53635f50bf9fcc9d4b78",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://dee34cc51d9f13635f7a43b448c97c289fde5bf1f89a4f209cafa53411b4bcf5",
+				"dweb:/ipfs/QmQAUBPsBVwkfFJZsiuCsTMQJzzGscNQKucdzBWFog3dME"
 			]
 		},
 		"1127/DataStruct.sol": {
-			"keccak256": "0xd8b017b69e27af6ead2abf7b6e4d7f29a0acb60baaf99416128902598d59f73e",
+			"keccak256": "0x8ceb9aba1cf5551ef7b43bd988883a0c1b7b88f4b9bbfe0626ad4baa93f35a89",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0f2392e12a13b4cff0b7960c4563879f6664da90943ca79da8aaebc89d73494f",
-				"dweb:/ipfs/QmaxGWWJG7sCpUPBhbzf26gi4T94pE2uXgeLzwxnf1BzCo"
+				"bzz-raw://4e6c25c8eca1522ba512bc070fe8b077458f12054a376d2e5804a95d1fe88664",
+				"dweb:/ipfs/QmRvf4Y4FdJRE8uq25Zt9eDFW748ZYa1cefGpo9BsKWX98"
+			]
+		},
+		"1127/Math.sol": {
+			"keccak256": "0x6d790b2a3a4c6fb5d7901e09c098663bad705b1681e7fe17718b057675cf5b47",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8998c4532df28dd49346ee7a8078db7f03df2f768b4046488e62fc9c447edc08",
+				"dweb:/ipfs/QmcSNYLnPJUNGrjE1uLsYUFwsz1JBQcAVyEcMJ8jVCndQT"
+			]
+		},
+		"1127/SignedMath.sol": {
+			"keccak256": "0xcd190ec50c58eef78381c5cad6dc71c2dcbb104fbb15eb9f412d8c71c77f8191",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://511f09b21404b420a7a31eedf3367168565f173384a8f2b8579e9897c310c173",
+				"dweb:/ipfs/QmQnY9XT1TQ244s7cfMk22AWDv4oSUyNzZkWaDofoD6AnB"
 			]
 		},
 		"1127/TraceAsset.sol": {
-			"keccak256": "0x07c54fd601bd08c070e8243686a1d029fdb7eaef173f2880493c8477bab52e3d",
+			"keccak256": "0x0cebca7414ecf0854d30948a87c16d62baf0c7e8dd218ad7c407c6b8dc08defd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e1bf2b970c18576405dbb9c59257dcdede7ba3a3dc675fd1a7bf015a43c637f7",
-				"dweb:/ipfs/QmeGo42NPoGPgdP1LrDN3FNYmeudutgBNSXPUHkrA6Wu7A"
-			]
-		},
-		"1127/util/AccessControl.sol": {
-			"keccak256": "0xedec336484228c4d15d067f26068987542e887cf2474c5033d8574bc3e2945e2",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://3687a464e5f79e6d56034123e371eb56c204a90a9eac811fb0d88894f0a9db1a",
-				"dweb:/ipfs/QmQZN6Mg3kLNH2UF2dnuhS56i6h9HA2JpMU8QkLwo3b2zj"
-			]
-		},
-		"1127/util/BytesUtil.sol": {
-			"keccak256": "0x4838e043649f4512ab04de03dc671bbabc101e344886c61f21633c45708ec2b5",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://5189a54ebbd475e75a2edf6334943ef73e30cc7fd77efc04e1685346a592a923",
-				"dweb:/ipfs/QmSZG3Gfg4G9VTXB5js8wXiXqA8Z5fJ2cL5dpzWKkGixrb"
+				"bzz-raw://f28942da8fccd55c8fbaffb78b690ac2c71765794143d95aa37b2b7c5bfc5c95",
+				"dweb:/ipfs/QmWbr5GsCjyY9g3A6rmHoxGGEF9tazJSFeyMibzgpcoTQW"
 			]
 		}
 	},

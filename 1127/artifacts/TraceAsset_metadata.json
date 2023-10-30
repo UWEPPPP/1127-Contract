@@ -15,6 +15,37 @@
 				"inputs": [
 					{
 						"indexed": true,
+						"internalType": "uint256",
+						"name": "assetId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "operateTime",
+						"type": "uint256"
+					}
+				],
+				"name": "LogAddTrace",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
 						"internalType": "bytes32",
 						"name": "role",
 						"type": "bytes32"
@@ -127,43 +158,21 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
-						"name": "hash",
-						"type": "string"
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
 					},
 					{
 						"components": [
 							{
-								"components": [
-									{
-										"internalType": "string",
-										"name": "cid",
-										"type": "string"
-									},
-									{
-										"internalType": "uint256",
-										"name": "createdAt",
-										"type": "uint256"
-									},
-									{
-										"internalType": "address",
-										"name": "creator",
-										"type": "address"
-									},
-									{
-										"internalType": "bool",
-										"name": "isPublic",
-										"type": "bool"
-									}
-								],
-								"internalType": "struct DataStruct.AssetMetadata",
-								"name": "asset",
-								"type": "tuple"
-							},
-							{
 								"internalType": "uint256",
 								"name": "operateTime",
 								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "operator",
+								"type": "address"
 							},
 							{
 								"internalType": "string",
@@ -203,46 +212,24 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
-						"name": "hash",
-						"type": "string"
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
 					}
 				],
-				"name": "get",
+				"name": "getAll",
 				"outputs": [
 					{
 						"components": [
 							{
-								"components": [
-									{
-										"internalType": "string",
-										"name": "cid",
-										"type": "string"
-									},
-									{
-										"internalType": "uint256",
-										"name": "createdAt",
-										"type": "uint256"
-									},
-									{
-										"internalType": "address",
-										"name": "creator",
-										"type": "address"
-									},
-									{
-										"internalType": "bool",
-										"name": "isPublic",
-										"type": "bool"
-									}
-								],
-								"internalType": "struct DataStruct.AssetMetadata",
-								"name": "asset",
-								"type": "tuple"
-							},
-							{
 								"internalType": "uint256",
 								"name": "operateTime",
 								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "operator",
+								"type": "address"
 							},
 							{
 								"internalType": "string",
@@ -261,17 +248,75 @@
 			{
 				"inputs": [
 					{
-						"internalType": "string",
-						"name": "hash",
-						"type": "string"
-					}
-				],
-				"name": "getLastOperateTime",
-				"outputs": [
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "timestamp",
 						"type": "uint256"
+					}
+				],
+				"name": "getByTimestamp",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "operateTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "operator",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "operateMsg",
+								"type": "string"
+							}
+						],
+						"internalType": "struct DataStruct.AssetTrace",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					}
+				],
+				"name": "getLast",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "operateTime",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "operator",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "operateMsg",
+								"type": "string"
+							}
+						],
+						"internalType": "struct DataStruct.AssetTrace",
+						"name": "",
+						"type": "tuple"
 					}
 				],
 				"stateMutability": "view",
@@ -389,7 +434,20 @@
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {},
+			"methods": {
+				"add(uint256,(uint256,address,string))": {
+					"notice": "添加记录"
+				},
+				"getAll(uint256)": {
+					"notice": "获取单个资产的所有记录"
+				},
+				"getByTimestamp(uint256,uint256)": {
+					"notice": "获取单个资产的某个时间节点上的记录 [待优化]"
+				},
+				"getLast(uint256)": {
+					"notice": "获取单个资产的最新记录"
+				}
+			},
 			"version": 1
 		}
 	},
@@ -409,28 +467,28 @@
 		"remappings": []
 	},
 	"sources": {
-		"1127/DataStruct.sol": {
-			"keccak256": "0x5b3daafe11fb26d67a1b4424004e5001d8d6a8a4287d2e08db56f19a3a5dba8b",
+		"1127/AccessControl.sol": {
+			"keccak256": "0x4f5532c72a63dfb39499dd33a659742f3f5849ed6fa48dd56c1a59398eb1c5c9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f736eba09d812a7378ce57c968e1a1abfec1cb5136143b2d880ee2e6d8813d2c",
-				"dweb:/ipfs/QmU35V5gCuNsC4RS7CSQNGGoxRLn553FxJc778hw2pSTvn"
+				"bzz-raw://170068f82a8f7cb0cbf7ef0cfbbb716078ef55db308c5cf85624bf4cce4f643c",
+				"dweb:/ipfs/QmbFfgiMbE164gepgfPgUfZ2XHpGXhqdo5n3G9ZRKV77nT"
+			]
+		},
+		"1127/DataStruct.sol": {
+			"keccak256": "0x8ceb9aba1cf5551ef7b43bd988883a0c1b7b88f4b9bbfe0626ad4baa93f35a89",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4e6c25c8eca1522ba512bc070fe8b077458f12054a376d2e5804a95d1fe88664",
+				"dweb:/ipfs/QmRvf4Y4FdJRE8uq25Zt9eDFW748ZYa1cefGpo9BsKWX98"
 			]
 		},
 		"1127/TraceAsset.sol": {
-			"keccak256": "0xf5f5b8927f54d341a520daf94fd356984c49bdefcf7176071e392f3e7d8a4776",
+			"keccak256": "0x0cebca7414ecf0854d30948a87c16d62baf0c7e8dd218ad7c407c6b8dc08defd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f197a0361b67ea23788b83424b845ff1922d92a44160babde9caae1b41123e22",
-				"dweb:/ipfs/QmNed4EagSXhpQGR595f71bdfTJz94cjnB4iN7JTrmgEeQ"
-			]
-		},
-		"1127/util/AccessControl.sol": {
-			"keccak256": "0xedec336484228c4d15d067f26068987542e887cf2474c5033d8574bc3e2945e2",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://3687a464e5f79e6d56034123e371eb56c204a90a9eac811fb0d88894f0a9db1a",
-				"dweb:/ipfs/QmQZN6Mg3kLNH2UF2dnuhS56i6h9HA2JpMU8QkLwo3b2zj"
+				"bzz-raw://f28942da8fccd55c8fbaffb78b690ac2c71765794143d95aa37b2b7c5bfc5c95",
+				"dweb:/ipfs/QmWbr5GsCjyY9g3A6rmHoxGGEF9tazJSFeyMibzgpcoTQW"
 			]
 		}
 	},
