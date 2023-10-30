@@ -6,7 +6,13 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "admin",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -88,58 +94,6 @@
 			{
 				"inputs": [],
 				"name": "DEFAULT_ADMIN",
-				"outputs": [
-					{
-						"internalType": "bytes32",
-						"name": "",
-						"type": "bytes32"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "GUANGDONG_ADMIN_ROLE",
-				"outputs": [
-					{
-						"internalType": "bytes32",
-						"name": "",
-						"type": "bytes32"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "HONGKONG_ADMIN_ROLE",
-				"outputs": [
-					{
-						"internalType": "bytes32",
-						"name": "",
-						"type": "bytes32"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "MACAO_ADMIN_ROLE",
-				"outputs": [
-					{
-						"internalType": "bytes32",
-						"name": "",
-						"type": "bytes32"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "SYSTEM_ADMIN_ROLE",
 				"outputs": [
 					{
 						"internalType": "bytes32",
@@ -245,24 +199,6 @@
 					},
 					{
 						"internalType": "address",
-						"name": "callerConfirmation",
-						"type": "address"
-					}
-				],
-				"name": "renounceRole",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "bytes32",
-						"name": "role",
-						"type": "bytes32"
-					},
-					{
-						"internalType": "address",
 						"name": "member",
 						"type": "address"
 					}
@@ -292,7 +228,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"1127/AccessContol.sol": "AccessControl"
+			"1127/AccessControl.sol": "AccessControl"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -306,20 +242,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"1127/AccessContol.sol": {
-			"keccak256": "0x134a68831243e6b0a7fdf5122f8e46bfb859d36f12fa308a91617a1095ca05bd",
+		"1127/AccessControl.sol": {
+			"keccak256": "0x4f5532c72a63dfb39499dd33a659742f3f5849ed6fa48dd56c1a59398eb1c5c9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8b10545e577abd20fa0eb19725aa44a4882c9a8d96c6e02d2bebb31bd104b286",
-				"dweb:/ipfs/QmQ1k4mrHjZ2AR63LtRYD9HFdwXwu4DRnBDdTYdzVvFytM"
-			]
-		},
-		"1127/util/BaseAccessControl.sol": {
-			"keccak256": "0x257de38e989beb3cf881bc39a7cfef4cae46599b5ce43d83c81c5004b47565a0",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://b3b9de506de817e18f99e0d5b3ddfb125a412f5fb0d7ef376c3f9273aa3ca781",
-				"dweb:/ipfs/QmQAMJsQwRdDPWhkeXNW3239MPDvnksrNMo6uWXZn3kgC9"
+				"bzz-raw://170068f82a8f7cb0cbf7ef0cfbbb716078ef55db308c5cf85624bf4cce4f643c",
+				"dweb:/ipfs/QmbFfgiMbE164gepgfPgUfZ2XHpGXhqdo5n3G9ZRKV77nT"
 			]
 		}
 	},

@@ -480,55 +480,47 @@
 		"remappings": []
 	},
 	"sources": {
-		"1127/CompanyProxy.sol": {
-			"keccak256": "0x7d485a3c5e1b2f634f46a3e872e7ba89e46f555ed6ec83f72b40bf25d702258e",
+		"1127/AccessControl.sol": {
+			"keccak256": "0x4f5532c72a63dfb39499dd33a659742f3f5849ed6fa48dd56c1a59398eb1c5c9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a64dcc82440ae7331617c0e676d47afe33883653078ea4b92b765a00799f8fc3",
-				"dweb:/ipfs/QmacX4BK2JGtrQS7avs9Zo8YQtMAA3HVif1BGKzEMwPEp8"
+				"bzz-raw://170068f82a8f7cb0cbf7ef0cfbbb716078ef55db308c5cf85624bf4cce4f643c",
+				"dweb:/ipfs/QmbFfgiMbE164gepgfPgUfZ2XHpGXhqdo5n3G9ZRKV77nT"
+			]
+		},
+		"1127/CommonUtil.sol": {
+			"keccak256": "0x751bbff5d2479761eea1a1aeb14e0b96789d614f105718a1395a5c86a2faca00",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://966ee1000bb9cd4ac17df7e51e64fb4d67671606ed1cc9750d44a6eb3fd6a53e",
+				"dweb:/ipfs/QmcBAuy49CuKuo4oERsRQ2RyF6vEgtgi2JG4ch1WAmwATz"
+			]
+		},
+		"1127/CompanyProxy.sol": {
+			"keccak256": "0xf0d40d60dbf4e7a33cc3830a68c07cfe3ec6d9ae3145ca0c4bfd592172c95950",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://77afd0f66ca8873e7243ee323bfedaac08c5dd657505670123bec455274916b1",
+				"dweb:/ipfs/QmTET4nbWj1E85y8g45EXTgdfF2jVhv1m5EXB6iHgkbtBM"
 			]
 		},
 		"1127/DataStruct.sol": {
-			"keccak256": "0xefcaf18c4376cb268ec58230940737d43e040d81d2d9fe32730ed2543d1d9b36",
+			"keccak256": "0x8ceb9aba1cf5551ef7b43bd988883a0c1b7b88f4b9bbfe0626ad4baa93f35a89",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://863f57e76c4f1119dfdd5be1d839bd869c22e415ffb225f4deb7755aeccad476",
-				"dweb:/ipfs/QmWSKYfA7pWAemRPNinsyPjEB7vU4Lb6XPcQsbzZVJHYZi"
+				"bzz-raw://4e6c25c8eca1522ba512bc070fe8b077458f12054a376d2e5804a95d1fe88664",
+				"dweb:/ipfs/QmRvf4Y4FdJRE8uq25Zt9eDFW748ZYa1cefGpo9BsKWX98"
 			]
 		},
 		"1127/DomainLogic.sol": {
-			"keccak256": "0x50dd91a1f20b534abfb1b9c72796f3fca22838d6cc8acba3b1874fc00ae4d1fe",
+			"keccak256": "0x35f02e89f2a0f78aa87c8662cc1ab51d41f6817f983ba5c3f3465dace04a9ed4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8e13a7a398105c4be1d3f3717cb197d15a25f0d9793ff5ef168ba535af1c3ef7",
-				"dweb:/ipfs/QmdhPSTgMTupxQx2nMuCZdhbH5BrJHLz6F42aaS4eV2QMg"
+				"bzz-raw://09ce178a47a5a26231fc238d3f1f7ae08d3fd6648b536f4e464db60e8c49ecc2",
+				"dweb:/ipfs/QmTX79bphTW8N8ZhvWKCNByyeJYhpnp12mkkWEZn1B2bLP"
 			]
 		},
-		"1127/TraceAsset.sol": {
-			"keccak256": "0xf5f5b8927f54d341a520daf94fd356984c49bdefcf7176071e392f3e7d8a4776",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://f197a0361b67ea23788b83424b845ff1922d92a44160babde9caae1b41123e22",
-				"dweb:/ipfs/QmNed4EagSXhpQGR595f71bdfTJz94cjnB4iN7JTrmgEeQ"
-			]
-		},
-		"1127/util/AccessControl.sol": {
-			"keccak256": "0xedec336484228c4d15d067f26068987542e887cf2474c5033d8574bc3e2945e2",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://3687a464e5f79e6d56034123e371eb56c204a90a9eac811fb0d88894f0a9db1a",
-				"dweb:/ipfs/QmQZN6Mg3kLNH2UF2dnuhS56i6h9HA2JpMU8QkLwo3b2zj"
-			]
-		},
-		"1127/util/CommonUtil.sol": {
-			"keccak256": "0x63c031af59058d98c70fdef1050457c12bc4675992f4206b6931f5f4d683e892",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://248a8cccf59251b8b72f28c7844bcdc20616dfa2f6ee3521e46fb68859995d7b",
-				"dweb:/ipfs/QmZg3wV9WRiJ1b82VRwaGtSyPZoEGQnvFYNJsZ3CvmNLLk"
-			]
-		},
-		"1127/util/Math.sol": {
+		"1127/Math.sol": {
 			"keccak256": "0x6d790b2a3a4c6fb5d7901e09c098663bad705b1681e7fe17718b057675cf5b47",
 			"license": "MIT",
 			"urls": [
@@ -536,12 +528,20 @@
 				"dweb:/ipfs/QmcSNYLnPJUNGrjE1uLsYUFwsz1JBQcAVyEcMJ8jVCndQT"
 			]
 		},
-		"1127/util/SignedMath.sol": {
+		"1127/SignedMath.sol": {
 			"keccak256": "0xcd190ec50c58eef78381c5cad6dc71c2dcbb104fbb15eb9f412d8c71c77f8191",
 			"license": "MIT",
 			"urls": [
 				"bzz-raw://511f09b21404b420a7a31eedf3367168565f173384a8f2b8579e9897c310c173",
 				"dweb:/ipfs/QmQnY9XT1TQ244s7cfMk22AWDv4oSUyNzZkWaDofoD6AnB"
+			]
+		},
+		"1127/TraceAsset.sol": {
+			"keccak256": "0x0cebca7414ecf0854d30948a87c16d62baf0c7e8dd218ad7c407c6b8dc08defd",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f28942da8fccd55c8fbaffb78b690ac2c71765794143d95aa37b2b7c5bfc5c95",
+				"dweb:/ipfs/QmWbr5GsCjyY9g3A6rmHoxGGEF9tazJSFeyMibzgpcoTQW"
 			]
 		}
 	},
