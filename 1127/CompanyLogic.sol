@@ -104,23 +104,9 @@ contract CompanyLogic is AccessControl,CommonUtil {
     function getAsset(uint256 id) public view checkAssetValid(id) returns (DataStruct.AssetMetadata memory) {
         return assetList[id];
     }
-
-    /**
-    添加数据 （指定组Worker）
-    **/
-    function addDataInGroup(string memory _group, string memory _dataCid) public AccessControl.onlyRole(toRole(_group)) returns (bool) {
-         
-         require(dataGroupList[_group].isOpen, error("CompanyLogic", "addworker", "No group found"));
-         uint256 size = dataGroupList[_group].assetSize;
-         size++;
-         DataStruct.AssetMetadata memory asset = DataStruct.AssetMetadata(_dataCid, block.timestamp, msg.sender, true);
-         dataGroupList[_group].assetSize = size;
-         dataGroupList[_group].assets[size] = asset;
-         _trace.add(toAssetIndex(_group, size),DataStruct.AssetTrace(asset,block.timestamp,msg.sender,"Create"));
-         return true;
-}
+     /**
      * 更新数据
-     */
+     **/
     function updateGroup(uint256 id,uint256 _groupId) public AccessControl.onlyRole(ADMIN_ROLE) checkAssetValid(id){
         DataStruct.AssetMetadata memory data = assetList[id];
 
