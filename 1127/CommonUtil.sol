@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
-import {Math} from "1127/util/Math.sol";
-import {SignedMath} from "1127/util/SignedMath.sol";
+import {Math} from "./Math.sol";
+import {SignedMath} from "./SignedMath.sol";
 contract CommonUtil  {
     bytes16 private constant HEX_DIGITS = "0123456789abcdef";
     

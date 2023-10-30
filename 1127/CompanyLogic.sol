@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
 
-import  "1127/util/CommonUtil.sol";
-import "1127/util/AccessControl.sol";
-import "1127/DataStruct.sol";
-import "1127/TraceAsset.sol";
+import  "./CommonUtil.sol";
+import "./TraceAsset.sol";
 
 contract CompanyLogic is AccessControl,CommonUtil {
     TraceAsset private _trace;
