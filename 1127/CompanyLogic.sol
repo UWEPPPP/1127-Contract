@@ -49,7 +49,7 @@ contract CompanyLogic is AccessControl,CommonUtil {
     /**
     添加员工(到指定组) (admin)
     **/
-    function addWorker(string memory _groupName, address worker_address) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool)  {
+    function addWorker(string memory _groupName, address worker_address) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool result)  {
         bytes32 groupRole = toRole(_groupName);
         require(!hasRole(groupRole, worker_address), error("CompanyLogic", "addWorker", "worker has been added"));
         setRoleAdmin(groupRole,ADMIN_ROLE);
@@ -62,7 +62,7 @@ contract CompanyLogic is AccessControl,CommonUtil {
     /**
     删除员工 (admin)
     **/
-    function removedWorker(address worker_address) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool) {
+    function removedWorker(address worker_address) public AccessControl.onlyRole(ADMIN_ROLE) returns (bool result) {
         DataStruct.Worker memory _removedWorker = workerList[worker_address];
         require(hasRole(_removedWorker.group, worker_address), error("CompanyLogic", "removedWorker", "The Worker No Found"));
         revokeRole(_removedWorker.group, worker_address);
@@ -102,7 +102,7 @@ contract CompanyLogic is AccessControl,CommonUtil {
     /**
      * 获取单个AssetData
      */
-    function getAsset(uint256 id) public view checkAssetValid(id) returns (DataStruct.AssetMetadata memory) {
+    function getAsset(uint256 id) public view checkAssetValid(id) returns (DataStruct.AssetMetadata memory asset) {
         return assetList[id];
     }
      /**
@@ -137,14 +137,14 @@ contract CompanyLogic is AccessControl,CommonUtil {
     /**
      * 获取追溯合约地址
      */
-    function getTraceAddr() public view returns(address) {
+    function getTraceAddr() public view returns(address traceAddr) {
         return address(_trace);
     }
 
     /**
      * 获取assetCount
      */
-    function getAssetCount() public view returns(uint256){
+    function getAssetCount() public view returns(uint256 assetCount){
         return assetCount;
     }
 }
