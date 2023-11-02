@@ -221,6 +221,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "admin",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "assetCount",
 				"outputs": [
 					{
@@ -528,11 +541,11 @@
 			]
 		},
 		"1127/CompanyProxy.sol": {
-			"keccak256": "0xf0d40d60dbf4e7a33cc3830a68c07cfe3ec6d9ae3145ca0c4bfd592172c95950",
+			"keccak256": "0x9ef5cda92795c0c82915d53a5545b19687120b28cb21fa9fb07049808f75e180",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://77afd0f66ca8873e7243ee323bfedaac08c5dd657505670123bec455274916b1",
-				"dweb:/ipfs/QmTET4nbWj1E85y8g45EXTgdfF2jVhv1m5EXB6iHgkbtBM"
+				"bzz-raw://04f9a2de545a05611773f288213bce0f5a06bbf70b70d6ce1986641b14e91494",
+				"dweb:/ipfs/QmWXni9jCP88qNipd5B8A1i1u1M1L5nyfozcjbKhYoycwk"
 			]
 		},
 		"1127/DataStruct.sol": {

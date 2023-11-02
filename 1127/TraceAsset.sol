@@ -33,7 +33,7 @@ contract TraceAsset is AccessControl{
     /**
      * 获取单个资产的所有记录
      */
-    function getAll(uint256 id) public view AccessControl.onlyRole(TRACER) returns(DataStruct.AssetTrace[] memory){
+    function getAll(uint256 id) public view AccessControl.onlyRole(TRACER) returns(DataStruct.AssetTrace[] memory listTrace){
         uint256 length = traceList[id].length;
         require(length > 0,"TraceAsset::GetAllError:: id is not valid");
         return traceList[id];
@@ -42,7 +42,7 @@ contract TraceAsset is AccessControl{
     /**
      * 获取单个资产的最新记录
      */
-    function getLast(uint256 id) public view AccessControl.onlyRole(TRACER) returns(DataStruct.AssetTrace memory){
+    function getLast(uint256 id) public view AccessControl.onlyRole(TRACER) returns(DataStruct.AssetTrace memory singleTrace){
         uint256 length = traceList[id].length;
         require(length > 0,"TraceAsset::GetLastError:: id is not valid");
         return traceList[id][length - 1];
@@ -52,7 +52,7 @@ contract TraceAsset is AccessControl{
      * 获取单个资产的某个时间节点上的记录
      * [待优化]
      */
-    function getByTimestamp(uint256 id,uint256 timestamp) public view AccessControl.onlyRole(TRACER) returns(DataStruct.AssetTrace memory){
+    function getByTimestamp(uint256 id,uint256 timestamp) public view AccessControl.onlyRole(TRACER) returns(DataStruct.AssetTrace memory singleTrace){
         uint256 length = traceList[id].length - 1;
         require(length >= 0,"TraceAsset::GetByTimestampError:: id is not valid");
         // 二分查找

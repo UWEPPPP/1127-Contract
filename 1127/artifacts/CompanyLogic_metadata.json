@@ -239,11 +239,24 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "result",
 						"type": "bool"
 					}
 				],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "admin",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -369,7 +382,7 @@
 							}
 						],
 						"internalType": "struct DataStruct.AssetMetadata",
-						"name": "",
+						"name": "asset",
 						"type": "tuple"
 					}
 				],
@@ -414,7 +427,7 @@
 				"outputs": [
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "traceAddr",
 						"type": "address"
 					}
 				],
@@ -481,7 +494,7 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "result",
 						"type": "bool"
 					}
 				],
@@ -692,11 +705,11 @@
 			]
 		},
 		"1127/CompanyLogic.sol": {
-			"keccak256": "0x73943291c894c169ee0e978b497d3fe44528586a7f5c53635f50bf9fcc9d4b78",
+			"keccak256": "0x3954f7c00d3b8b0c9f6adcd884439a9b77ea794e05ca2dbf25f4f9a952fca23f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://dee34cc51d9f13635f7a43b448c97c289fde5bf1f89a4f209cafa53411b4bcf5",
-				"dweb:/ipfs/QmQAUBPsBVwkfFJZsiuCsTMQJzzGscNQKucdzBWFog3dME"
+				"bzz-raw://b690a94656fdba3866f64c22f3c7f0bd6720f5ddaf93ab89fb22d9ad0f4a69a0",
+				"dweb:/ipfs/QmTi9nts8W46Z2rC7DVA7Ybeh8d7FrozU4tQq6bkuPzyJQ"
 			]
 		},
 		"1127/DataStruct.sol": {

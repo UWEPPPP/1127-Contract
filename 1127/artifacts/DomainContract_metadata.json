@@ -309,7 +309,7 @@
 				"outputs": [
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "addr",
 						"type": "address"
 					}
 				],
@@ -328,7 +328,7 @@
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "result",
 						"type": "bool"
 					}
 				],
@@ -497,11 +497,11 @@
 			]
 		},
 		"1127/CompanyProxy.sol": {
-			"keccak256": "0xf0d40d60dbf4e7a33cc3830a68c07cfe3ec6d9ae3145ca0c4bfd592172c95950",
+			"keccak256": "0x9ef5cda92795c0c82915d53a5545b19687120b28cb21fa9fb07049808f75e180",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://77afd0f66ca8873e7243ee323bfedaac08c5dd657505670123bec455274916b1",
-				"dweb:/ipfs/QmTET4nbWj1E85y8g45EXTgdfF2jVhv1m5EXB6iHgkbtBM"
+				"bzz-raw://04f9a2de545a05611773f288213bce0f5a06bbf70b70d6ce1986641b14e91494",
+				"dweb:/ipfs/QmWXni9jCP88qNipd5B8A1i1u1M1L5nyfozcjbKhYoycwk"
 			]
 		},
 		"1127/DataStruct.sol": {
@@ -513,11 +513,11 @@
 			]
 		},
 		"1127/DomainLogic.sol": {
-			"keccak256": "0x35f02e89f2a0f78aa87c8662cc1ab51d41f6817f983ba5c3f3465dace04a9ed4",
+			"keccak256": "0x3b95ff56ba8c99f5262fd88edbed3ffb28d6b5b24d9d3aaf2af986bb21c191fc",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://09ce178a47a5a26231fc238d3f1f7ae08d3fd6648b536f4e464db60e8c49ecc2",
-				"dweb:/ipfs/QmTX79bphTW8N8ZhvWKCNByyeJYhpnp12mkkWEZn1B2bLP"
+				"bzz-raw://9d71557f4b960911cf4b75612c5253ed01a844f6c1795781db4af50272b2fdda",
+				"dweb:/ipfs/QmZQbmzjGREA6tPGsmnszeo2cPgA1J8d57X4sXmu5kqKLK"
 			]
 		},
 		"1127/Math.sol": {
