@@ -18,7 +18,7 @@ contract DomainContract is AccessControl,CommonUtil{
           _commonlogicContract = _commonlogicAddress;
     }
 
-    function registerCompany(string memory company_did,string memory company_name,address company_owner)public AccessControl.onlyRole(DOMAIN_ADMIN) returns (address) {
+    function registerCompany(string memory company_did,string memory company_name,address company_owner)public AccessControl.onlyRole(DOMAIN_ADMIN) returns (address companyAddr) {
        
        require(companies[company_did].addr == address(0),error("DomainLogic","registerCompany","The company is existed"));
        CompanyProxy companyAddress = new CompanyProxy(company_owner,company_name,_commonlogicContract);
@@ -27,7 +27,7 @@ contract DomainContract is AccessControl,CommonUtil{
        return address(companyAddress);
     }
 
-    function removeCompany(string memory company_did)public AccessControl.onlyRole(DOMAIN_ADMIN) returns (bool) {
+    function removeCompany(string memory company_did)public AccessControl.onlyRole(DOMAIN_ADMIN) returns (bool result) {
        
        require(companies[company_did].addr != address(0),error("DomainLogic","removeCompany","The company doesn't exist"));
        DataStruct.Company memory _removedcompany = companies[company_did];
